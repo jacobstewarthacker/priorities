@@ -1,1 +1,643 @@
-<!-- full app coming -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priorities</title>
+<script src="https://accounts.google.com/gsi/client" async></script>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f5f0;
+  --surface: #ffffff;
+  --border: #e2ddd6;
+  --border-strong: #c8c2b8;
+  --text: #1a1916;
+  --text-muted: #7a7670;
+  --text-faint: #b0aca6;
+  --accent: #c04a20;
+  --accent-light: #f9ece7;
+  --green: #2a7a52;
+  --green-light: #e8f4ee;
+  --amber: #b07010;
+  --amber-light: #fdf3dc;
+  --red: #a02020;
+  --red-light: #fceaea;
+  --font-serif: 'Libre Baskerville', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); font-family: var(--font-sans); color: var(--text); min-height: 100vh; }
+
+/* Layout */
+.page { max-width: 680px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.page-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2rem; }
+.page-title { font-family: var(--font-serif); font-size: 22px; font-weight: 400; letter-spacing: -.3px; }
+.page-date { font-size: 12px; color: var(--text-muted); }
+.topbar { display: flex; gap: 6px; justify-content: flex-end; margin-bottom: 1.5rem; flex-wrap: wrap; }
+button { font-family: var(--font-sans); cursor: pointer; }
+.btn { background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 5px 12px; border-radius: 6px; transition: all .15s; }
+.btn:hover { border-color: var(--border-strong); color: var(--text); }
+.btn-accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-accent:hover { background: #a83d18; border-color: #a83d18; color: #fff; }
+
+/* Writing anchor */
+.anchor { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.75rem; }
+.anchor-row { display: flex; align-items: center; gap: 10px; padding: 5px 0; }
+.anchor-row + .anchor-row { border-top: 1px solid var(--border); margin-top: 4px; padding-top: 9px; }
+.anchor-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.anchor-dot.writing { background: var(--accent); }
+.anchor-dot.med { background: var(--green); }
+.anchor-label { font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); min-width: 70px; }
+.anchor-goal { flex: 1; }
+.anchor-goal input { width: 100%; background: none; border: none; border-bottom: 1px solid transparent; font-size: 13px; font-weight: 500; font-family: var(--font-serif); color: var(--text); padding: 1px 0; transition: border-color .15s; }
+.anchor-goal input:focus { outline: none; border-bottom-color: var(--border-strong); }
+.anchor-time { font-size: 11px; color: var(--text-faint); flex-shrink: 0; }
+.anchor-cal { font-size: 11px; padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border); background: none; color: var(--text-muted); flex-shrink: 0; transition: all .15s; }
+.anchor-cal:hover { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+
+/* Sections */
+.section { margin-bottom: 1.75rem; }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: .6rem; }
+.section-label { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--text-faint); }
+.section-count { font-size: 10px; color: var(--text-faint); }
+.tasks { display: flex; flex-direction: column; gap: 5px; }
+
+/* Task cards */
+.tc { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: .6rem .9rem; display: flex; align-items: flex-start; gap: 9px; transition: border-color .15s; }
+.tc:hover { border-color: var(--border-strong); }
+.tc.now { border-left: 3px solid var(--accent); }
+.tc.overdue { border-left: 3px solid var(--red); }
+.tc.dim { opacity: .5; }
+.tc-check { width: 16px; height: 16px; border: 1px solid var(--border-strong); border-radius: 50%; flex-shrink: 0; margin-top: 2px; cursor: pointer; transition: all .15s; display: flex; align-items: center; justify-content: center; }
+.tc-check:hover { background: var(--green-light); border-color: var(--green); }
+.tc-body { flex: 1; min-width: 0; }
+.tc-title { font-size: 13px; color: var(--text); line-height: 1.4; margin-bottom: 3px; }
+.tc-meta { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
+.badge { font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 400; }
+.badge-proj { background: var(--bg); color: var(--text-muted); border: 1px solid var(--border); }
+.badge-sm { background: var(--bg); color: var(--text-muted); }
+.badge-lg { background: var(--amber-light); color: var(--amber); }
+.badge-ov { background: var(--red-light); color: var(--red); }
+.badge-sn { background: var(--amber-light); color: var(--amber); }
+.due-text { font-size: 11px; color: var(--text-faint); }
+.tc-link { font-size: 11px; color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; gap: 3px; opacity: .7; transition: opacity .15s; }
+.tc-link:hover { opacity: 1; }
+.tc-link svg { width: 10px; height: 10px; }
+.tc-actions { display: flex; gap: 3px; flex-shrink: 0; }
+.ta { background: none; border: none; font-size: 10px; padding: 2px 5px; border-radius: 3px; color: var(--text-faint); transition: all .15s; }
+.ta:hover { background: var(--bg); color: var(--text); }
+.url-edit { display: none; margin-top: 5px; }
+.url-edit input { width: 100%; font-size: 11px; font-family: var(--font-sans); padding: 3px 7px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--text); }
+.url-edit input:focus { outline: none; border-color: var(--border-strong); }
+.tc:hover .url-edit { display: flex; gap: 5px; align-items: center; }
+.url-edit label { font-size: 10px; color: var(--text-faint); white-space: nowrap; }
+
+/* Add row */
+.add-row { display: flex; gap: 5px; margin-top: 7px; flex-wrap: wrap; }
+.add-row input[type=text] { flex: 1; min-width: 140px; font-size: 12px; font-family: var(--font-sans); padding: 5px 9px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--text); }
+.add-row input[type=text]:focus { outline: none; border-color: var(--border-strong); }
+.add-row input[type=date] { font-size: 11px; padding: 5px 7px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--text); font-family: var(--font-sans); width: 130px; }
+.add-row select { font-size: 11px; padding: 5px 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--text-muted); font-family: var(--font-sans); }
+.add-row .btn { padding: 5px 12px; font-size: 12px; }
+
+/* Collapsible */
+.coll-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: .5rem 0; border-top: 1px solid var(--border); }
+.coll-header:hover .section-label { color: var(--text-muted); }
+.coll-toggle { font-size: 10px; color: var(--text-faint); background: none; border: none; }
+
+/* Medical */
+.med-item { display: flex; align-items: center; gap: 9px; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text-muted); }
+.med-item:last-child { border-bottom: none; }
+.med-check { width: 14px; height: 14px; border: 1px solid var(--border-strong); border-radius: 3px; flex-shrink: 0; cursor: pointer; transition: all .15s; }
+.med-check:hover { background: var(--green-light); }
+.med-check.done { background: var(--green); border-color: var(--green); }
+.med-done { text-decoration: line-through; color: var(--text-faint); }
+
+.empty { font-size: 12px; color: var(--text-faint); padding: .3rem 0; font-style: italic; }
+
+/* Weekly modal */
+.modal-overlay { position: fixed; inset: 0; background: rgba(20,18,14,.45); display: flex; align-items: center; justify-content: center; padding: 1rem; z-index: 100; }
+.modal { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; width: 100%; max-width: 580px; max-height: 90vh; overflow-y: auto; }
+.modal h2 { font-family: var(--font-serif); font-size: 18px; font-weight: 400; margin-bottom: .2rem; }
+.modal-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 1.25rem; }
+.step-dots { display: flex; gap: 6px; margin-bottom: 1.25rem; }
+.step-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); transition: background .2s; }
+.step-dot.active { background: var(--accent); }
+.step-dot.done { background: var(--green); }
+.modal label { font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 4px; margin-top: 1rem; text-transform: uppercase; letter-spacing: .06em; }
+.modal textarea { width: 100%; font-size: 13px; font-family: var(--font-sans); padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px; resize: vertical; color: var(--text); background: var(--surface); }
+.modal textarea:focus { outline: none; border-color: var(--border-strong); }
+.modal-btns { display: flex; gap: 8px; margin-top: 1.5rem; justify-content: flex-end; }
+.modal-btns .btn { font-size: 13px; padding: 6px 16px; }
+.review-item { display: flex; align-items: flex-start; gap: 9px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+.review-item:last-child { border-bottom: none; }
+.review-item label { font-size: 13px; color: var(--text); flex: 1; cursor: pointer; line-height: 1.4; }
+.review-item input[type=checkbox] { margin-top: 3px; flex-shrink: 0; accent-color: var(--green); }
+.tier-btns { display: flex; gap: 5px; margin-top: 5px; }
+.tier-btn { font-size: 10px; padding: 2px 8px; border-radius: 3px; border: 1px solid var(--border); background: none; color: var(--text-muted); cursor: pointer; transition: all .15s; }
+.tier-btn:hover { border-color: var(--border-strong); color: var(--text); }
+.tier-btn.sel { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+.week-snapshot { background: var(--bg); border-radius: 8px; padding: .75rem 1rem; font-size: 13px; color: var(--text-muted); margin-bottom: .75rem; }
+.week-snapshot strong { color: var(--text); }
+
+/* Print styles */
+@media print {
+  .topbar, .add-row, .tc-actions, .anchor-cal, .coll-toggle { display: none !important; }
+  body { background: white; }
+  .page { padding: 0; max-width: 100%; }
+  .tc { break-inside: avoid; }
+}
+
+@media (max-width: 480px) {
+  .page { padding: 1rem .9rem 3rem; }
+  .add-row input[type=date] { width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-header" id="page-header">
+    <span class="page-title">Priorities</span>
+    <span class="page-date" id="page-date"></span>
+  <div style="display:flex;align-items:center;gap:10px">
+    <span id="sync-status" style="font-size:11px;color:var(--text-faint)">local only</span>
+    <span id="signin-btn"></span>
+  </div>
+  </div>
+  <div class="topbar">
+    <button class="btn" onclick="window.print()">Print / PDF</button>
+    <button class="btn" onclick="morningCheckin()">Morning check-in</button>
+    <button class="btn btn-accent" onclick="startWeekly()">Weekly review</button>
+  </div>
+  <div id="anchor"></div>
+  <div id="main"></div>
+  <div id="email-sec"></div>
+  <div id="med-sec"></div>
+</div>
+<div id="modal-root"></div>
+
+<script>
+// ── Config ────────────────────────────────────────────────────────────────
+const CLIENT_ID = '209279894381-c9o935587kh418p9jichnfp0squvnlkf.apps.googleusercontent.com';
+const SCOPES = 'https://www.googleapis.com/auth/spreadsheets';
+const LS_TOKEN = 'goog_token', LS_SHEET = 'goog_sheet_id';
+let gToken = null, sheetId = null, syncStatus = 'local';
+
+function initGoogleAuth() {
+  gToken = localStorage.getItem(LS_TOKEN);
+  sheetId = localStorage.getItem(LS_SHEET);
+  if (gToken && sheetId) { syncStatus = 'synced'; loadFromSheet(); }
+  const trySetup = () => { if (window.google?.accounts?.oauth2) setupTokenClient(); };
+  trySetup();
+  setTimeout(trySetup, 1500);
+}
+function setupTokenClient() {
+  if (!window.google?.accounts?.oauth2 || window._tokenClient) return;
+  window._tokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: CLIENT_ID, scope: SCOPES,
+    callback: async (resp) => {
+      if (resp.error) { setSyncStatus('error'); return; }
+      gToken = resp.access_token; localStorage.setItem(LS_TOKEN, gToken);
+      setSyncStatus('auth'); await ensureSheet(); await syncToSheet(); setSyncStatus('synced'); render();
+    }
+  });
+}
+function signIn() { if (window._tokenClient) window._tokenClient.requestAccessToken(); else { setupTokenClient(); setTimeout(()=>window._tokenClient?.requestAccessToken(),500); } }
+function setSyncStatus(s) {
+  syncStatus = s;
+  const el = document.getElementById('sync-status'); if (!el) return;
+  const L = {local:'local only',auth:'connecting...',synced:'synced',saving:'saving...',error:'sync error',offline:'offline'};
+  const C = {local:'var(--text-faint)',auth:'var(--amber)',synced:'var(--green)',saving:'var(--amber)',error:'var(--red)',offline:'var(--text-faint)'};
+  el.textContent = L[s]||s; el.style.color = C[s]||'var(--text-faint)';
+}
+async function sheetsReq(method, path, body) {
+  if (!gToken) return null;
+  try {
+    const res = await fetch('https://sheets.googleapis.com/v4/spreadsheets'+path, {
+      method, headers: {'Authorization':'Bearer '+gToken,'Content-Type':'application/json'},
+      body: body ? JSON.stringify(body) : undefined
+    });
+    if (res.status===401) { gToken=null; localStorage.removeItem(LS_TOKEN); setSyncStatus('local'); return null; }
+    return res.ok ? res.json() : null;
+  } catch(e) { setSyncStatus('offline'); return null; }
+}
+async function ensureSheet() {
+  sheetId = localStorage.getItem(LS_SHEET); if (sheetId) return;
+  const res = await sheetsReq('POST','',{
+    properties:{title:'Priorities - Jacob Hacker'},
+    sheets:[{properties:{title:'Tasks',sheetId:0}},{properties:{title:'Meta',sheetId:1}}]
+  });
+  if (res?.spreadsheetId) {
+    sheetId = res.spreadsheetId; localStorage.setItem(LS_SHEET, sheetId);
+    await sheetsReq('PUT','/'+sheetId+'/values/Tasks!A1?valueInputOption=RAW',
+      {values:[['id','title','tier','proj','effort','due','email','url']]});
+  }
+}
+async function syncToSheet() {
+  if (!sheetId||!gToken) return; setSyncStatus('saving');
+  const rows = tasks.map(t=>[t.id,t.title,t.tier,t.proj,t.effort,t.due||'',t.email?'true':'false',t.url||'']);
+  await sheetsReq('PUT','/'+sheetId+'/values/Tasks!A2?valueInputOption=RAW',{values:rows.length?rows:[['']]});
+  await sheetsReq('PUT','/'+sheetId+'/values/Meta!A1?valueInputOption=RAW',
+    {values:[['writingGoal',writingGoal],['medItems',JSON.stringify(medItems)]]});
+  setSyncStatus('synced');
+}
+async function loadFromSheet() {
+  if (!sheetId||!gToken) return; setSyncStatus('auth');
+  const [tr,mr] = await Promise.all([
+    sheetsReq('GET','/'+sheetId+'/values/Tasks!A1:H500'),
+    sheetsReq('GET','/'+sheetId+'/values/Meta!A1:B10')
+  ]);
+  if (tr?.values?.length>1) {
+    tasks = tr.values.slice(1).filter(r=>r[0]).map(r=>({
+      id:parseInt(r[0])||0,title:r[1]||'',tier:r[2]||'week',
+      proj:r[3]||'admin',effort:r[4]||'md',due:r[5]||'',email:r[6]==='true',url:r[7]||''
+    }));
+    nextId = Math.max(...tasks.map(t=>t.id))+1;
+    localStorage.setItem(SK,JSON.stringify(tasks));
+  }
+  if (mr?.values) mr.values.forEach(r=>{
+    if(r[0]==='writingGoal'){writingGoal=r[1];localStorage.setItem(WK,writingGoal);}
+    if(r[0]==='medItems'){try{medItems=JSON.parse(r[1]);localStorage.setItem(MK,r[1]);}catch(e){}}
+  });
+  setSyncStatus('synced'); render();
+}
+
+// ── Storage keys ──────────────────────────────────────────────────────────
+const SK='jt_v2', WK='jw_v2', MK='jm_v2', EOK='jeo_v2', MOK='jmo_v2';
+
+// ── Defaults ──────────────────────────────────────────────────────────────
+const DEFTASKS = [
+  {id:1,title:'Draft panel concept — "Political Economy of Democratic Backsliding" (Cologne APEX workshop)',tier:'now',proj:'APEX',effort:'md',due:'2026-03-27',email:false},
+  {id:2,title:'American Academy Berlin questionnaire',tier:'now',proj:'admin',effort:'sm',due:'2026-03-28',email:false},
+  {id:3,title:'APSA RSVP — "The Fed, Politics, and Distributive Justice" panel',tier:'now',proj:'admin',effort:'sm',due:'2026-03-25',email:true},
+  {id:4,title:'Dissertation reader report — Nicholas Ottone, "The Policy Influence of Non-Profit Service Providers"',tier:'week',proj:'service',effort:'lg',due:'2026-04-12',email:false,url:'https://dissertation.yale.edu/dprs/onor/readerReview?onorDetailId=46900'},
+  {id:5,title:'Letter to Margaret Levi re: Robin Hood Paradox (awaiting Philipp)',tier:'week',proj:'writing',effort:'sm',due:'',email:false},
+  {id:6,title:'ASPE interview pipeline (share doc when ready)',tier:'week',proj:'ASPE',effort:'md',due:'',email:false},
+  {id:7,title:'APEX: CORE score handover',tier:'week',proj:'APEX',effort:'sm',due:'',email:false},
+  {id:8,title:'APEX: postdoc + predoc funding details',tier:'week',proj:'APEX',effort:'sm',due:'',email:false},
+  {id:9,title:'APEX: Prane Marx visit',tier:'week',proj:'APEX',effort:'sm',due:'',email:false},
+  {id:10,title:'APEX: funding of ASPE survey',tier:'week',proj:'APEX',effort:'sm',due:'',email:false},
+  {id:11,title:'Inequality memo to Philipp',tier:'week',proj:'writing',effort:'sm',due:'',email:false},
+  {id:12,title:'CES Representation: submit APSR',tier:'week',proj:'research',effort:'lg',due:'',email:false},
+  {id:13,title:'CES Representation: Maplight data?',tier:'week',proj:'research',effort:'sm',due:'',email:false},
+  {id:14,title:'APE: event w/ Mark B.?',tier:'week',proj:'APE',effort:'sm',due:'',email:false},
+  {id:15,title:'SSN: reach out to Isabel K.',tier:'later',proj:'SSN',effort:'sm',due:'',email:false},
+  {id:16,title:'SSN: reach out to Dave Wilk / Tobin + data',tier:'later',proj:'SSN',effort:'sm',due:'',email:false},
+  {id:17,title:'Yale: Paul in fall — seek center affiliation',tier:'later',proj:'Yale',effort:'sm',due:'',email:false},
+  {id:18,title:'Ludwig: course planning',tier:'later',proj:'Ludwig',effort:'md',due:'',email:false},
+  {id:19,title:'Risk perceptions: ping Mark?',tier:'later',proj:'research',effort:'sm',due:'',email:false},
+  {id:20,title:'Racing schedule — Google Doc JRT DE 2026',tier:'later',proj:'personal',effort:'sm',due:'',email:false},
+  {id:21,title:'Guitar?',tier:'later',proj:'personal',effort:'sm',due:'',email:false},
+  {id:22,title:'Hewlett emails (bkettenring)',tier:'later',proj:'admin',effort:'sm',due:'',email:true},
+  {id:23,title:'PCard expense report',tier:'now',proj:'admin',effort:'sm',due:'2026-03-28',email:true},
+];
+const DEFMED = [
+  {id:'m1',title:'PSA screening',done:false},
+  {id:'m2',title:'Lipid panel',done:false},
+  {id:'m3',title:'Diabetes screening',done:false},
+  {id:'m4',title:'Aneurysm follow-up',done:false},
+  {id:'m5',title:'Allergic rx review',done:false},
+];
+const PROJS = ['writing','APEX','ASPE','APE','SSN','research','service','admin','Yale','Ludwig','personal'];
+
+// ── State ─────────────────────────────────────────────────────────────────
+let tasks, writingGoal, medItems, emailOpen, medOpen, nextId, weeklyState;
+
+function load() {
+  try { tasks = JSON.parse(localStorage.getItem(SK)) || [...DEFTASKS]; } catch(e) { tasks = [...DEFTASKS]; }
+  writingGoal = localStorage.getItem(WK) || 'Ch. 3 — parties section (Now or Never)';
+  try { medItems = JSON.parse(localStorage.getItem(MK)) || [...DEFMED]; } catch(e) { medItems = [...DEFMED]; }
+  emailOpen = localStorage.getItem(EOK) !== 'false';
+  medOpen = localStorage.getItem(MOK) === 'true';
+  nextId = tasks.length ? Math.max(...tasks.map(t => t.id)) + 1 : 50;
+  initGoogleAuth();
+}
+function save() { localStorage.setItem(SK, JSON.stringify(tasks)); syncToSheet(); }
+function saveMed() { localStorage.setItem(MK, JSON.stringify(medItems)); }
+function saveWG(v) { writingGoal = v; localStorage.setItem(WK, v); syncToSheet(); }
+
+// ── Date helpers ──────────────────────────────────────────────────────────
+const today = new Date(); today.setHours(0,0,0,0);
+const fmtDate = d => {
+  if (!d) return '';
+  const dt = new Date(d + 'T00:00:00');
+  const diff = Math.round((dt - today) / 86400000);
+  if (diff === 0) return 'today'; if (diff === 1) return 'tomorrow';
+  if (diff === -1) return 'yesterday'; if (diff < 0) return `${Math.abs(diff)}d overdue`;
+  return `in ${diff}d`;
+};
+const fmtFull = d => d ? new Date(d+'T00:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}) : '';
+const isOv = d => d && new Date(d+'T00:00:00') < today;
+const isSn = d => { if (!d) return false; const diff = Math.round((new Date(d+'T00:00:00') - today) / 86400000); return diff >= 0 && diff <= 3; };
+
+// ── Task HTML ─────────────────────────────────────────────────────────────
+function tcHTML(t, dimmed) {
+  const ov = isOv(t.due), sn = !ov && isSn(t.due);
+  const cls = ['tc', dimmed?'dim':(ov?'overdue':(t.tier==='now'&&!t.email?'now':''))].filter(Boolean).join(' ');
+  const linkIcon = `<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 2H2a1 1 0 00-1 1v7a1 1 0 001 1h7a1 1 0 001-1V7M8 1h3m0 0v3m0-3L5 7"/></svg>`;
+  const titleHTML = t.url
+    ? `<a href="${t.url}" target="_blank" class="tc-link" style="font-size:13px;color:var(--text);text-decoration:none;line-height:1.4" onclick="event.stopPropagation()">${t.title} ${linkIcon}</a>`
+    : `<span class="tc-title-text" onclick="editTitle(${t.id},this)" style="cursor:text" title="Click to edit">${t.title}</span>`;
+  return `<div class="${cls}" id="tc${t.id}">
+    <div class="tc-check" onclick="done(${t.id})" title="Mark complete"></div>
+    <div class="tc-body">
+      <div class="tc-title">${titleHTML}</div>
+      <div class="tc-meta">
+        <span class="badge badge-proj">${t.proj}</span>
+        ${t.effort==='lg'?'<span class="badge badge-lg">large</span>':''}
+        ${t.effort==='sm'?'<span class="badge badge-sm">small</span>':''}
+        ${ov?`<span class="badge badge-ov">${fmtDate(t.due)}</span>`:''}
+        ${sn&&!ov?`<span class="badge badge-sn">${fmtDate(t.due)}</span>`:''}
+        ${t.due&&!ov&&!sn?`<span class="due-text">${fmtDate(t.due)}</span>`:''}
+      </div>
+      <div class="url-edit">
+        <label>link</label>
+        <input type="text" value="${t.url||''}" placeholder="Paste email or doc URL..." onblur="setUrl(${t.id},this.value)" onkeydown="if(event.key==='Enter')this.blur()">
+      </div>
+    </div>
+    <div class="tc-actions">
+      ${t.tier!=='now'?`<button class="ta" onclick="mv(${t.id},'now')">&#8593; now</button>`:''}
+      ${t.tier==='now'?`<button class="ta" onclick="mv(${t.id},'week')">&#8595; week</button>`:''}
+      ${t.tier==='week'?`<button class="ta" onclick="mv(${t.id},'later')">later</button>`:''}
+      ${t.tier==='later'?`<button class="ta" onclick="mv(${t.id},'week')">&#8593; week</button>`:''}
+      <button class="ta" onclick="editTask(${t.id})" title="Edit">&#9998;</button>
+      <button class="ta" onclick="del(${t.id})">&#10005;</button>
+    </div>
+  </div>`;
+}
+
+function addRowHTML(sfx, isEmail) {
+  return `<div class="add-row">
+    <input type="text" id="nt-${sfx}" placeholder="Add task..." onkeydown="if(event.key==='Enter')addT('${sfx}',${isEmail})">
+    <select id="np-${sfx}">${PROJS.map(p=>`<option>${p}</option>`).join('')}</select>
+    <select id="ne-${sfx}"><option value="sm">small</option><option value="md" selected>medium</option><option value="lg">large</option></select>
+    <input type="date" id="nd-${sfx}">
+    <input type="text" id="nu-${sfx}" placeholder="Link (optional)" style="min-width:120px;flex:0.6">
+    <button class="btn" onclick="addT('${sfx}',${isEmail})">Add</button>
+  </div>`;
+}
+
+// ── Render ────────────────────────────────────────────────────────────────
+function render() {
+  const todayStr = today.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+  document.getElementById('page-date').textContent = todayStr;
+  setSyncStatus(syncStatus);
+  const sbtn = document.getElementById('signin-btn');
+  if (sbtn) sbtn.innerHTML = !gToken
+    ? '<button class="btn" onclick="signIn()" style="font-size:11px;padding:3px 10px">Sign in to sync</button>'
+    : sheetId ? '<a href="https://docs.google.com/spreadsheets/d/'+sheetId+'" target="_blank" style="font-size:11px;color:var(--text-faint);text-decoration:none">open sheet</a>' : '';
+
+  // Anchor
+  document.getElementById('anchor').innerHTML = `
+    <div class="anchor">
+      <div class="anchor-row">
+        <div class="anchor-dot writing"></div>
+        <span class="anchor-label">Writing</span>
+        <div class="anchor-goal"><input id="wg" value="${writingGoal.replace(/"/g,'&quot;')}" onblur="saveWG(this.value)" onkeydown="if(event.key==='Enter')this.blur()" placeholder="Today's writing goal..."></div>
+        <span class="anchor-time">9–12am</span>
+        <button class="anchor-cal" onclick="calPrompt('writing')">+ cal</button>
+      </div>
+      <div class="anchor-row">
+        <div class="anchor-dot med"></div>
+        <span class="anchor-label">Meditation</span>
+        <div class="anchor-goal" style="font-size:13px;font-family:var(--font-serif);color:var(--text-muted)">15 min — daily</div>
+        <span class="anchor-time">7am</span>
+        <button class="anchor-cal" onclick="calPrompt('meditation')">+ cal</button>
+      </div>
+    </div>`;
+
+  // Main task tiers
+  const nowM = tasks.filter(t => t.tier==='now' && !t.email);
+  const week = tasks.filter(t => t.tier==='week' && !t.email).sort((a,b) => { if(a.due&&b.due) return new Date(a.due)-new Date(b.due); if(a.due) return -1; if(b.due) return 1; return 0; });
+  const later = tasks.filter(t => t.tier==='later' && !t.email);
+
+  document.getElementById('main').innerHTML = `
+    <div class="section">
+      <div class="section-header"><span class="section-label">Now — top priority</span><span class="section-count">${nowM.length}</span></div>
+      <div class="tasks">${nowM.length ? nowM.map(t=>tcHTML(t,false)).join('') : '<div class="empty">Nothing urgent — surface a task from below.</div>'}</div>
+      ${addRowHTML('now',false)}
+    </div>
+    <div class="section">
+      <div class="section-header"><span class="section-label">This week</span><span class="section-count">${week.length}</span></div>
+      <div class="tasks">${week.length ? week.map(t=>tcHTML(t,false)).join('') : '<div class="empty">No active tasks.</div>'}</div>
+      ${addRowHTML('week',false)}
+    </div>
+    <div class="section">
+      <div class="section-header"><span class="section-label">Later — on the radar</span><span class="section-count">${later.length}</span></div>
+      <div class="tasks">${later.length ? later.map(t=>tcHTML(t,true)).join('') : '<div class="empty">Nothing parked.</div>'}</div>
+      ${addRowHTML('later',false)}
+    </div>`;
+
+  // Email section
+  const eAll = [...tasks.filter(t=>t.tier==='now'&&t.email), ...tasks.filter(t=>t.tier!=='now'&&t.email).sort((a,b)=>{if(a.due&&b.due)return new Date(a.due)-new Date(b.due);if(a.due)return-1;if(b.due)return 1;return 0;})];
+  document.getElementById('email-sec').innerHTML = `
+    <div class="section" style="margin-bottom:.75rem">
+      <div class="coll-header" onclick="toggleEmail()">
+        <span class="section-label">Email & admin (${eAll.length})</span>
+        <button class="coll-toggle">${emailOpen ? '&#9650;' : '&#9660;'}</button>
+      </div>
+      ${emailOpen ? `<div class="tasks" style="margin-top:7px">${eAll.length ? eAll.map(t=>tcHTML(t,true)).join('') : '<div class="empty">No email tasks.</div>'}</div>${addRowHTML('email',true)}` : ''}
+    </div>`;
+
+  // Medical section
+  document.getElementById('med-sec').innerHTML = `
+    <div class="section">
+      <div class="coll-header" onclick="toggleMed()">
+        <span class="section-label">Medical follow-ups (${medItems.filter(m=>!m.done).length} open)</span>
+        <button class="coll-toggle">${medOpen ? '&#9650;' : '&#9660;'}</button>
+      </div>
+      ${medOpen ? `<div style="margin-top:6px">${medItems.map(m=>`<div class="med-item"><div class="med-check${m.done?' done':''}" onclick="toggleMedItem('${m.id}')"></div><span class="${m.done?'med-done':''}">${m.title}</span></div>`).join('')}</div>` : ''}
+    </div>`;
+}
+
+// ── Actions ───────────────────────────────────────────────────────────────
+function done(id) { tasks = tasks.filter(t => t.id !== id); save(); render(); }
+function del(id) { tasks = tasks.filter(t => t.id !== id); save(); render(); }
+function mv(id, tier) { const t = tasks.find(t => t.id === id); if (t) { t.tier = tier; save(); render(); } }
+function setUrl(id, url) { const t = tasks.find(t => t.id === id); if (t) { t.url = url.trim(); save(); render(); } }
+function toggleEmail() { emailOpen = !emailOpen; localStorage.setItem(EOK, emailOpen); render(); }
+function toggleMed() { medOpen = !medOpen; localStorage.setItem(MOK, medOpen); render(); }
+function toggleMedItem(id) { const m = medItems.find(m => m.id === id); if (m) { m.done = !m.done; saveMed(); render(); } }
+function addT(sfx, isEmail) {
+  const tier = sfx === 'email' ? 'now' : sfx === 'later' ? 'later' : sfx === 'week' ? 'week' : 'now';
+  const title = document.getElementById('nt-'+sfx)?.value.trim();
+  if (!title) return;
+  const url = document.getElementById('nu-'+sfx)?.value.trim() || '';
+  tasks.push({ id: nextId++, title, tier, proj: document.getElementById('np-'+sfx).value, effort: document.getElementById('ne-'+sfx).value, due: document.getElementById('nd-'+sfx).value || '', email: isEmail, url });
+  save(); render();
+}
+
+// ── Inline title editing ──────────────────────────────────────────────────
+function editTitle(id, el) {
+  const t = tasks.find(t => t.id === id);
+  if (!t) return;
+  const orig = t.title;
+  const inp = document.createElement('input');
+  inp.type = 'text';
+  inp.value = orig;
+  inp.style.cssText = 'width:100%;font-size:13px;font-family:var(--font-sans);padding:1px 4px;border:1px solid var(--border-strong);border-radius:4px;background:var(--surface);color:var(--text);';
+  el.replaceWith(inp);
+  inp.focus(); inp.select();
+  const commit = () => { const val = inp.value.trim(); if (val) { t.title = val; save(); } render(); };
+  inp.addEventListener('blur', commit);
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') inp.blur(); if (e.key === 'Escape') { inp.value = orig; inp.blur(); } });
+}
+
+// ── Full edit popover ────────────────────────────────────────────────────
+function editTask(id) {
+  const t = tasks.find(t => t.id === id);
+  if (!t) return;
+  const pop = document.createElement('div');
+  pop.id = 'edit-popover';
+  pop.style.cssText = 'position:fixed;inset:0;background:rgba(20,18,14,.4);display:flex;align-items:center;justify-content:center;z-index:200;padding:1rem';
+  pop.innerHTML = `<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;width:100%;max-width:500px">
+    <div style="font-family:var(--font-serif);font-size:16px;font-weight:400;margin-bottom:1rem">Edit task</div>
+    <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px">Title</label>
+    <textarea id="ep-title" rows="2" style="width:100%;font-size:13px;font-family:var(--font-sans);padding:7px 9px;border:1px solid var(--border);border-radius:6px;resize:vertical;color:var(--text);background:var(--surface);margin-bottom:.75rem">${t.title.replace(/</g,'&lt;')}</textarea>
+    <div style="display:flex;gap:8px;margin-bottom:.75rem;flex-wrap:wrap">
+      <div style="flex:1;min-width:100px">
+        <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px">Project</label>
+        <select id="ep-proj" style="width:100%;font-size:12px;padding:5px 6px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:var(--font-sans)">${PROJS.map(p=>'<option'+(p===t.proj?' selected':'')+'>'+p+'</option>').join('')}</select>
+      </div>
+      <div style="flex:1;min-width:100px">
+        <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px">Effort</label>
+        <select id="ep-effort" style="width:100%;font-size:12px;padding:5px 6px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:var(--font-sans)">
+          <option value="sm"${t.effort==='sm'?' selected':''}>small</option>
+          <option value="md"${t.effort==='md'?' selected':''}>medium</option>
+          <option value="lg"${t.effort==='lg'?' selected':''}>large</option>
+        </select>
+      </div>
+      <div style="flex:1;min-width:120px">
+        <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px">Due date</label>
+        <input id="ep-due" type="date" value="${t.due||''}" style="width:100%;font-size:12px;padding:5px 7px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:var(--font-sans)">
+      </div>
+    </div>
+    <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px">Link (email or doc URL)</label>
+    <input id="ep-url" type="text" value="${t.url||''}" placeholder="Paste URL..." style="width:100%;font-size:12px;padding:5px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:var(--font-sans);margin-bottom:1.25rem">
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn" onclick="document.getElementById('edit-popover').remove()">Cancel</button>
+      <button class="btn btn-accent" onclick="saveEdit(${id})">Save</button>
+    </div>
+  </div>`;
+  pop.addEventListener('click', e => { if (e.target === pop) pop.remove(); });
+  document.body.appendChild(pop);
+  document.getElementById('ep-title').focus();
+}
+
+function saveEdit(id) {
+  const t = tasks.find(t => t.id === id);
+  if (!t) return;
+  const title = document.getElementById('ep-title').value.trim();
+  if (title) t.title = title;
+  t.proj = document.getElementById('ep-proj').value;
+  t.effort = document.getElementById('ep-effort').value;
+  t.due = document.getElementById('ep-due').value || '';
+  t.url = document.getElementById('ep-url').value.trim();
+  save();
+  document.getElementById('edit-popover').remove();
+  render();
+}
+
+// ── Calendar prompt (copy to clipboard for Claude) ────────────────────────
+function calPrompt(type) {
+  const goal = document.getElementById('wg')?.value || writingGoal;
+  const dateStr = today.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  const text = type === 'writing'
+    ? `Please draft an Outlook calendar block for writing 9am–12pm today (${dateStr}), title: "Now or Never — ${goal}". Show me the details and ask me to confirm before creating it.`
+    : `Please draft an Outlook calendar block for meditation at 7am today (${dateStr}), 15 minutes, title: "Meditation". Show me the details and ask me to confirm.`;
+  navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard — paste into Claude to create the calendar block.')).catch(() => alert(text));
+}
+
+// ── Morning check-in (builds context string, copies to clipboard) ─────────
+function morningCheckin() {
+  const nowM = tasks.filter(t => t.tier==='now' && !t.email);
+  const week = tasks.filter(t => t.tier==='week' && !t.email).sort((a,b)=>{if(a.due&&b.due)return new Date(a.due)-new Date(b.due);if(a.due)return-1;if(b.due)return 1;return 0;});
+  const email = tasks.filter(t => t.email);
+  const overdue = tasks.filter(t => t.due && new Date(t.due+'T00:00:00') < today);
+  const fmt = t => `  - ${t.title}${t.due?' ['+fmtDate(t.due)+']':''} (${t.proj})`;
+  const text = `Morning check-in. Here is my current task list:\n\nWRITING GOAL: ${writingGoal}\n\nNOW (top priority):\n${nowM.map(fmt).join('\n')||'  (none)'}\n\nTHIS WEEK:\n${week.map(fmt).join('\n')||'  (none)'}\n\nEMAIL & ADMIN:\n${email.map(fmt).join('\n')||'  (none)'}${overdue.length?'\n\nOVERDUE:\n'+overdue.map(fmt).join('\n'):''}\n\nPlease pull my Outlook calendar for today and tomorrow, then give me a brief: what's scheduled, what I suggest as today's writing focus, and 2–3 other priorities. Then let's agree on any calendar blocks to create.`;
+  navigator.clipboard.writeText(text).then(() => alert('Check-in context copied — paste into Claude to begin your morning planning session.')).catch(() => { const w = window.open(''); w.document.write('<pre>'+text+'</pre>'); });
+}
+
+// ── Weekly review modal ───────────────────────────────────────────────────
+function startWeekly() { weeklyState = { step: 0 }; renderWeekly(); }
+function closeWeekly() { document.getElementById('modal-root').innerHTML = ''; }
+
+function renderWeekly() {
+  const steps = ['Review & clear', 'Triage tiers', 'Writing focus', 'Email & admin', 'Wrap up'];
+  const step = weeklyState.step;
+  const allMain = tasks.filter(t => !t.email);
+  const eAll = tasks.filter(t => t.email);
+
+  let body = '';
+  if (step === 0) {
+    const active = tasks.filter(t => t.tier==='now' || t.tier==='week');
+    body = `${active.map(t=>`<div class="review-item"><input type="checkbox" id="wr${t.id}" onchange="if(this.checked){done(${t.id});renderWeekly()}"><label for="wr${t.id}">${t.title}<span style="color:var(--text-faint);font-size:11px">${t.due?' · '+fmtFull(t.due):''}</span></label></div>`).join('')}
+    <label>New tasks to add this week?</label><textarea id="w-new" rows="3" placeholder="One per line..."></textarea>`;
+  } else if (step === 1) {
+    body = allMain.map(t=>`<div class="review-item" style="flex-direction:column;align-items:flex-start;gap:4px">
+      <label style="cursor:default;font-weight:500">${t.title} <span style="color:var(--text-faint);font-size:11px">[${t.proj}]</span></label>
+      <div class="tier-btns">
+        <button class="tier-btn${t.tier==='now'?' sel':''}" onclick="mv(${t.id},'now');renderWeekly()">now</button>
+        <button class="tier-btn${t.tier==='week'?' sel':''}" onclick="mv(${t.id},'week');renderWeekly()">this week</button>
+        <button class="tier-btn${t.tier==='later'?' sel':''}" onclick="mv(${t.id},'later');renderWeekly()">later</button>
+      </div></div>`).join('');
+  } else if (step === 2) {
+    body = `<label>This week's writing focus (Now or Never)</label>
+    <textarea id="w-wg" rows="2">${writingGoal}</textarea>
+    <label>Other writing tasks this week?</label>
+    <textarea id="w-other" rows="2" placeholder="Robin Hood Paradox, memos, etc."></textarea>`;
+  } else if (step === 3) {
+    body = `${eAll.length ? eAll.map(t=>`<div class="review-item"><input type="checkbox" id="we${t.id}" onchange="if(this.checked){done(${t.id});renderWeekly()}"><label for="we${t.id}">${t.title} <span style="color:var(--text-faint);font-size:11px">${t.due?' · '+fmtFull(t.due):''} · ${t.tier}</span></label><button class="ta" onclick="mv(${t.id},'now');renderWeekly()">&#8593; now</button></div>`).join('') : '<div class="empty">No email tasks.</div>'}
+    <label>New email tasks this week?</label><textarea id="w-email" rows="2" placeholder="One per line..."></textarea>`;
+  } else if (step === 4) {
+    body = `<div class="week-snapshot">Now: <strong>${tasks.filter(t=>t.tier==='now'&&!t.email).length}</strong> &nbsp;·&nbsp; This week: <strong>${tasks.filter(t=>t.tier==='week'&&!t.email).length}</strong> &nbsp;·&nbsp; Later: <strong>${tasks.filter(t=>t.tier==='later'&&!t.email).length}</strong> &nbsp;·&nbsp; Email: <strong>${tasks.filter(t=>t.email).length}</strong></div>
+    <div style="font-size:13px;color:var(--text-muted);margin-bottom:1rem">Writing focus: ${writingGoal}</div>
+    <label>Notes or reminders for the week?</label><textarea id="w-recap" rows="3" placeholder="Anything to carry into Monday..."></textarea>`;
+  }
+
+  document.getElementById('modal-root').innerHTML = `
+    <div class="modal-overlay" onclick="if(event.target===this)closeWeekly()">
+      <div class="modal">
+        <div class="step-dots">${steps.map((_,i)=>`<div class="step-dot${i===step?' active':i<step?' done':''}"></div>`).join('')}</div>
+        <h2>${steps[step]}</h2>
+        <div class="modal-sub">${['Mark anything resolved from last week.','Set each task\'s tier for the coming week.','Protect writing mornings — set the week\'s focus.','Review email tasks. Escalate anything urgent.','You\'re set. Print a copy for your reMarkable.'][step]}</div>
+        ${body}
+        <div class="modal-btns">
+          <button class="btn" onclick="closeWeekly()">Cancel</button>
+          ${step > 0 ? `<button class="btn" onclick="weeklyBack()">&#8592; Back</button>` : ''}
+          <button class="btn btn-accent" onclick="weeklyNext()">${step === steps.length-1 ? 'Done — print PDF' : 'Next &#8594;'}</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function weeklyBack() { weeklyState.step--; renderWeekly(); }
+function weeklyNext() {
+  if (weeklyState.step === 0) {
+    const raw = document.getElementById('w-new')?.value.trim();
+    if (raw) raw.split('\n').filter(l=>l.trim()).forEach(l => tasks.push({id:nextId++,title:l.trim(),tier:'week',proj:'admin',effort:'md',due:'',email:false}));
+    save();
+  }
+  if (weeklyState.step === 2) {
+    const wg = document.getElementById('w-wg')?.value.trim();
+    if (wg) saveWG(wg);
+  }
+  if (weeklyState.step === 3) {
+    const raw = document.getElementById('w-email')?.value.trim();
+    if (raw) raw.split('\n').filter(l=>l.trim()).forEach(l => tasks.push({id:nextId++,title:l.trim(),tier:'now',proj:'admin',effort:'sm',due:'',email:true}));
+    save();
+  }
+  if (weeklyState.step === 4) {
+    closeWeekly(); render(); setTimeout(() => window.print(), 300); return;
+  }
+  weeklyState.step++; renderWeekly();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+load();
+render();
+</script>
+</body>
+</html>
