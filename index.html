@@ -179,7 +179,7 @@ button { font-family: var(--font-sans); cursor: pointer; }
 <div id="modal-root"></div>
 
 <script>
-// Ã¢ÂÂÃ¢ÂÂ Config Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Config ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 const CLIENT_ID = '209279894381-c9o935587kh418p9jichnfp0squvnlkf.apps.googleusercontent.com';
 const SCOPES = 'https://www.googleapis.com/auth/spreadsheets';
 const LS_TOKEN = 'goog_token', LS_SHEET = 'goog_sheet_id';
@@ -265,15 +265,15 @@ async function loadFromSheet() {
   setSyncStatus('synced'); render();
 }
 
-// Ã¢ÂÂÃ¢ÂÂ Storage keys Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Storage keys ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 const SK='jt_v2', WK='jw_v2', MK='jm_v2', EOK='jeo_v2', MOK='jmo_v2', NK='jn_v2', NOK='jno_v2';
 
-// Ã¢ÂÂÃ¢ÂÂ Defaults Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Defaults ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 const DEFTASKS = [
-  {id:1,title:'Draft panel concept Ã¢ÂÂ "Political Economy of Democratic Backsliding" (Cologne APEX workshop)',tier:'now',proj:'APEX',effort:'md',due:'2026-03-27',email:false},
+  {id:1,title:'Draft panel concept ÃÂ¢ÃÂÃÂ "Political Economy of Democratic Backsliding" (Cologne APEX workshop)',tier:'now',proj:'APEX',effort:'md',due:'2026-03-27',email:false},
   {id:2,title:'American Academy Berlin questionnaire',tier:'now',proj:'admin',effort:'sm',due:'2026-03-28',email:false},
-  {id:3,title:'APSA RSVP Ã¢ÂÂ "The Fed, Politics, and Distributive Justice" panel',tier:'now',proj:'admin',effort:'sm',due:'2026-03-25',email:true},
-  {id:4,title:'Dissertation reader report Ã¢ÂÂ Nicholas Ottone, "The Policy Influence of Non-Profit Service Providers"',tier:'week',proj:'service',effort:'lg',due:'2026-04-12',email:false,url:'https://dissertation.yale.edu/dprs/onor/readerReview?onorDetailId=46900'},
+  {id:3,title:'APSA RSVP ÃÂ¢ÃÂÃÂ "The Fed, Politics, and Distributive Justice" panel',tier:'now',proj:'admin',effort:'sm',due:'2026-03-25',email:true},
+  {id:4,title:'Dissertation reader report ÃÂ¢ÃÂÃÂ Nicholas Ottone, "The Policy Influence of Non-Profit Service Providers"',tier:'week',proj:'service',effort:'lg',due:'2026-04-12',email:false,url:'https://dissertation.yale.edu/dprs/onor/readerReview?onorDetailId=46900'},
   {id:5,title:'Letter to Margaret Levi re: Robin Hood Paradox (awaiting Philipp)',tier:'week',proj:'writing',effort:'sm',due:'',email:false},
   {id:6,title:'ASPE interview pipeline (share doc when ready)',tier:'week',proj:'ASPE',effort:'md',due:'',email:false},
   {id:7,title:'APEX: CORE score handover',tier:'week',proj:'APEX',effort:'sm',due:'',email:false},
@@ -286,10 +286,10 @@ const DEFTASKS = [
   {id:14,title:'APE: event w/ Mark B.?',tier:'week',proj:'APE',effort:'sm',due:'',email:false},
   {id:15,title:'SSN: reach out to Isabel K.',tier:'later',proj:'SSN',effort:'sm',due:'',email:false},
   {id:16,title:'SSN: reach out to Dave Wilk / Tobin + data',tier:'later',proj:'SSN',effort:'sm',due:'',email:false},
-  {id:17,title:'Yale: Paul in fall Ã¢ÂÂ seek center affiliation',tier:'later',proj:'Yale',effort:'sm',due:'',email:false},
+  {id:17,title:'Yale: Paul in fall ÃÂ¢ÃÂÃÂ seek center affiliation',tier:'later',proj:'Yale',effort:'sm',due:'',email:false},
   {id:18,title:'Ludwig: course planning',tier:'later',proj:'Ludwig',effort:'md',due:'',email:false},
   {id:19,title:'Risk perceptions: ping Mark?',tier:'later',proj:'research',effort:'sm',due:'',email:false},
-  {id:20,title:'Racing schedule Ã¢ÂÂ Google Doc JRT DE 2026',tier:'later',proj:'personal',effort:'sm',due:'',email:false},
+  {id:20,title:'Racing schedule ÃÂ¢ÃÂÃÂ Google Doc JRT DE 2026',tier:'later',proj:'personal',effort:'sm',due:'',email:false},
   {id:21,title:'Guitar?',tier:'later',proj:'personal',effort:'sm',due:'',email:false},
   {id:22,title:'Hewlett emails (bkettenring)',tier:'later',proj:'admin',effort:'sm',due:'',email:true},
   {id:23,title:'PCard expense report',tier:'now',proj:'admin',effort:'sm',due:'2026-03-28',email:true},
@@ -303,12 +303,12 @@ const DEFMED = [
 ];
 const PROJS = ['writing','APEX','ASPE','APE','SSN','research','service','admin','Yale','Ludwig','personal'];
 
-// Ã¢ÂÂÃ¢ÂÂ State Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ State ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 let tasks, writingGoal, medItems, emailOpen, medOpen, nextId, weeklyState, notes, notesOpen;
 
 function load() {
   try { tasks = JSON.parse(localStorage.getItem(SK)) || [...DEFTASKS]; } catch(e) { tasks = [...DEFTASKS]; }
-  writingGoal = localStorage.getItem(WK) || 'Ch. 3 Ã¢ÂÂ parties section (Now or Never)';
+  writingGoal = localStorage.getItem(WK) || 'Ch. 3 ÃÂ¢ÃÂÃÂ parties section (Now or Never)';
   try { medItems = JSON.parse(localStorage.getItem(MK)) || [...DEFMED]; } catch(e) { medItems = [...DEFMED]; }
   emailOpen = localStorage.getItem(EOK) !== 'false';
   medOpen = localStorage.getItem(MOK) === 'true';
@@ -321,7 +321,7 @@ function save() { localStorage.setItem(SK, JSON.stringify(tasks)); syncToSheet()
 function saveMed() { localStorage.setItem(MK, JSON.stringify(medItems)); }
 function saveWG(v) { writingGoal = v; localStorage.setItem(WK, v); syncToSheet(); }
 
-// Ã¢ÂÂÃ¢ÂÂ Date helpers Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Date helpers ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 const today = new Date(); today.setHours(0,0,0,0);
 const fmtDate = d => {
   if (!d) return '';
@@ -335,7 +335,7 @@ const fmtFull = d => d ? new Date(d+'T00:00:00').toLocaleDateString('en-US',{wee
 const isOv = d => d && new Date(d+'T00:00:00') < today;
 const isSn = d => { if (!d) return false; const diff = Math.round((new Date(d+'T00:00:00') - today) / 86400000); return diff >= 0 && diff <= 3; };
 
-// Ã¢ÂÂÃ¢ÂÂ Task HTML Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Task HTML ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function tcHTML(t, dimmed) {
   const ov = isOv(t.due), sn = !ov && isSn(t.due);
   const cls = ['tc', dimmed?'dim':(ov?'overdue':(t.tier==='now'&&!t.email?'now':''))].filter(Boolean).join(' ');
@@ -382,7 +382,7 @@ function addRowHTML(sfx, isEmail) {
   </div>`;
 }
 
-// Ã¢ÂÂÃ¢ÂÂ Render Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Render ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function render() {
   const todayStr = today.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
   document.getElementById('page-date').textContent = todayStr;
@@ -399,13 +399,13 @@ function render() {
         <div class="anchor-dot writing"></div>
         <span class="anchor-label">Writing</span>
         <div class="anchor-goal"><input id="wg" value="${writingGoal.replace(/"/g,'&quot;')}" onblur="saveWG(this.value)" onkeydown="if(event.key==='Enter')this.blur()" placeholder="Today's writing goal..."></div>
-        <span class="anchor-time">9Ã¢ÂÂ12am</span>
+        <span class="anchor-time">9ÃÂ¢ÃÂÃÂ12am</span>
         <button class="anchor-cal" onclick="calPrompt('writing')">+ cal</button>
       </div>
       <div class="anchor-row">
         <div class="anchor-dot med"></div>
         <span class="anchor-label">Meditation</span>
-        <div class="anchor-goal" style="font-size:13px;font-family:var(--font-serif);color:var(--text-muted)">15 min Ã¢ÂÂ daily</div>
+        <div class="anchor-goal" style="font-size:13px;font-family:var(--font-serif);color:var(--text-muted)">15 min ÃÂ¢ÃÂÃÂ daily</div>
         <span class="anchor-time">7am</span>
         <button class="anchor-cal" onclick="calPrompt('meditation')">+ cal</button>
       </div>
@@ -418,8 +418,8 @@ function render() {
 
   document.getElementById('main').innerHTML = `
     <div class="section">
-      <div class="section-header"><span class="section-label">Now Ã¢ÂÂ top priority</span><span class="section-count">${nowM.length}</span></div>
-      <div class="tasks">${nowM.length ? nowM.map(t=>tcHTML(t,false)).join('') : '<div class="empty">Nothing urgent Ã¢ÂÂ surface a task from below.</div>'}</div>
+      <div class="section-header"><span class="section-label">Now ÃÂ¢ÃÂÃÂ top priority</span><span class="section-count">${nowM.length}</span></div>
+      <div class="tasks">${nowM.length ? nowM.map(t=>tcHTML(t,false)).join('') : '<div class="empty">Nothing urgent ÃÂ¢ÃÂÃÂ surface a task from below.</div>'}</div>
       ${addRowHTML('now',false)}
     </div>
     <div class="section">
@@ -428,7 +428,7 @@ function render() {
       ${addRowHTML('week',false)}
     </div>
     <div class="section">
-      <div class="section-header"><span class="section-label">Later Ã¢ÂÂ on the radar</span><span class="section-count">${later.length}</span></div>
+      <div class="section-header"><span class="section-label">Later ÃÂ¢ÃÂÃÂ on the radar</span><span class="section-count">${later.length}</span></div>
       <div class="tasks">${later.length ? later.map(t=>tcHTML(t,true)).join('') : '<div class="empty">Nothing parked.</div>'}</div>
       ${addRowHTML('later',false)}
     </div>`;
@@ -455,18 +455,46 @@ function render() {
     </div>`;
 }
 
-  document.getElementById('notes-sec').innerHTML = '<div class="section">' +
-    '<div class="coll-header" onclick="toggleNotes()">' +
-    '<span class="section-label">Notes &amp; reminders (' + notes.length + ')</span>' +
-    '<button class="coll-toggle">' + (notesOpen ? '&#9650;' : '&#9660;') + '</button>' +
-    '</div>' +
-    (notesOpen ? '<div style="margin-top:6px">' +
-      (notes.length ? notes.map(function(n){ return '<div class="med-item" style="justify-content:space-between"><span style="color:var(--text);flex:1">' + n.text + '</span><button class="ta" onclick="delNote(' + n.id + ')">&#10005;</button></div>'; }).join('') : '<div class="empty">No notes yet.</div>') +
-      '</div><div class="add-row" style="margin-top:7px"><input type="text" id="new-note" placeholder="Add a note or reminder..." style="flex:1;min-width:140px;font-size:12px;font-family:var(--font-sans);padding:5px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text)" onkeydown="if(event.key==='Enter')addNote()"><button class="btn" onclick="addNote()">Add</button></div>'
-    : '') +
-    '</div>';
+  // Notes section render
+  (function(){
+    var ni = document.getElementById('notes-sec');
+    if(!ni) return;
+    var items = notes.length ? notes.map(function(n){
+      var d = document.createElement('div');
+      d.className = 'med-item'; d.style.justifyContent = 'space-between';
+      d.innerHTML = '<span style="color:var(--text);flex:1">' + n.text + '</span>';
+      var btn = document.createElement('button');
+      btn.className = 'ta'; btn.innerHTML = '&#10005;';
+      btn.onclick = function(){ delNote(n.id); };
+      d.appendChild(btn);
+      return d;
+    }) : null;
+    var open = notesOpen;
+    ni.innerHTML = '';
+    var wrap = document.createElement('div'); wrap.className = 'section';
+    var hdr = document.createElement('div'); hdr.className = 'coll-header';
+    hdr.onclick = toggleNotes;
+    hdr.innerHTML = '<span class="section-label">Notes &amp; reminders (' + notes.length + ')</span><button class="coll-toggle">' + (open ? '&#9650;' : '&#9660;') + '</button>';
+    wrap.appendChild(hdr);
+    if(open){
+      var body = document.createElement('div'); body.style.marginTop = '6px';
+      if(items){ items.forEach(function(d){ body.appendChild(d); }); }
+      else { body.innerHTML = '<div class="empty">No notes yet.</div>'; }
+      wrap.appendChild(body);
+      var row = document.createElement('div'); row.className = 'add-row'; row.style.marginTop = '7px';
+      var inp = document.createElement('input'); inp.type = 'text'; inp.id = 'new-note';
+      inp.placeholder = 'Add a note or reminder...';
+      inp.style.cssText = 'flex:1;min-width:140px;font-size:12px;font-family:var(--font-sans);padding:5px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text)';
+      inp.addEventListener('keydown', function(e){ if(e.key==='Enter') addNote(); });
+      var btn = document.createElement('button'); btn.className = 'btn'; btn.textContent = 'Add';
+      btn.onclick = addNote;
+      row.appendChild(inp); row.appendChild(btn);
+      wrap.appendChild(row);
+    }
+    ni.appendChild(wrap);
+  })();
 
-// Ã¢ÂÂÃ¢ÂÂ Actions Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Actions ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function done(id) { tasks = tasks.filter(t => t.id !== id); save(); render(); }
 function del(id) { tasks = tasks.filter(t => t.id !== id); save(); render(); }
 function mv(id, tier) { const t = tasks.find(t => t.id === id); if (t) { t.tier = tier; save(); render(); } }
@@ -483,7 +511,7 @@ function addT(sfx, isEmail) {
   save(); render();
 }
 
-// Ã¢ÂÂÃ¢ÂÂ Inline title editing Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Inline title editing ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function editTitle(id, el) {
   const t = tasks.find(t => t.id === id);
   if (!t) return;
@@ -499,7 +527,7 @@ function editTitle(id, el) {
   inp.addEventListener('keydown', e => { if (e.key === 'Enter') inp.blur(); if (e.key === 'Escape') { inp.value = orig; inp.blur(); } });
 }
 
-// Ã¢ÂÂÃ¢ÂÂ Full edit popover Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Full edit popover ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function editTask(id) {
   const t = tasks.find(t => t.id === id);
   if (!t) return;
@@ -554,28 +582,28 @@ function saveEdit(id) {
   render();
 }
 
-// Ã¢ÂÂÃ¢ÂÂ Calendar prompt (copy to clipboard for Claude) Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Calendar prompt (copy to clipboard for Claude) ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function calPrompt(type) {
   const goal = document.getElementById('wg')?.value || writingGoal;
   const dateStr = today.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
   const text = type === 'writing'
-    ? `Please draft an Outlook calendar block for writing 9amÃ¢ÂÂ12pm today (${dateStr}), title: "Now or Never Ã¢ÂÂ ${goal}". Show me the details and ask me to confirm before creating it.`
+    ? `Please draft an Outlook calendar block for writing 9amÃÂ¢ÃÂÃÂ12pm today (${dateStr}), title: "Now or Never ÃÂ¢ÃÂÃÂ ${goal}". Show me the details and ask me to confirm before creating it.`
     : `Please draft an Outlook calendar block for meditation at 7am today (${dateStr}), 15 minutes, title: "Meditation". Show me the details and ask me to confirm.`;
-  navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard Ã¢ÂÂ paste into Claude to create the calendar block.')).catch(() => alert(text));
+  navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard ÃÂ¢ÃÂÃÂ paste into Claude to create the calendar block.')).catch(() => alert(text));
 }
 
-// Ã¢ÂÂÃ¢ÂÂ Morning check-in (builds context string, copies to clipboard) Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Morning check-in (builds context string, copies to clipboard) ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function morningCheckin() {
   const nowM = tasks.filter(t => t.tier==='now' && !t.email);
   const week = tasks.filter(t => t.tier==='week' && !t.email).sort((a,b)=>{if(a.due&&b.due)return new Date(a.due)-new Date(b.due);if(a.due)return-1;if(b.due)return 1;return 0;});
   const email = tasks.filter(t => t.email);
   const overdue = tasks.filter(t => t.due && new Date(t.due+'T00:00:00') < today);
   const fmt = t => `  - ${t.title}${t.due?' ['+fmtDate(t.due)+']':''} (${t.proj})`;
-  const text = `Morning check-in. Here is my current task list:\n\nWRITING GOAL: ${writingGoal}\n\nNOW (top priority):\n${nowM.map(fmt).join('\n')||'  (none)'}\n\nTHIS WEEK:\n${week.map(fmt).join('\n')||'  (none)'}\n\nEMAIL & ADMIN:\n${email.map(fmt).join('\n')||'  (none)'}${overdue.length?'\n\nOVERDUE:\n'+overdue.map(fmt).join('\n'):''}\n\nPlease pull my Outlook calendar for today and tomorrow, then give me a brief: what's scheduled, what I suggest as today's writing focus, and 2Ã¢ÂÂ3 other priorities. Then let's agree on any calendar blocks to create.`;
-  navigator.clipboard.writeText(text).then(() => alert('Check-in context copied Ã¢ÂÂ paste into Claude to begin your morning planning session.')).catch(() => { const w = window.open(''); w.document.write('<pre>'+text+'</pre>'); });
+  const text = `Morning check-in. Here is my current task list:\n\nWRITING GOAL: ${writingGoal}\n\nNOW (top priority):\n${nowM.map(fmt).join('\n')||'  (none)'}\n\nTHIS WEEK:\n${week.map(fmt).join('\n')||'  (none)'}\n\nEMAIL & ADMIN:\n${email.map(fmt).join('\n')||'  (none)'}${overdue.length?'\n\nOVERDUE:\n'+overdue.map(fmt).join('\n'):''}\n\nPlease pull my Outlook calendar for today and tomorrow, then give me a brief: what's scheduled, what I suggest as today's writing focus, and 2ÃÂ¢ÃÂÃÂ3 other priorities. Then let's agree on any calendar blocks to create.`;
+  navigator.clipboard.writeText(text).then(() => alert('Check-in context copied ÃÂ¢ÃÂÃÂ paste into Claude to begin your morning planning session.')).catch(() => { const w = window.open(''); w.document.write('<pre>'+text+'</pre>'); });
 }
 
-// Ã¢ÂÂÃ¢ÂÂ Weekly review modal Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Weekly review modal ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function startWeekly() { weeklyState = { step: 0 }; renderWeekly(); }
 function closeWeekly() { document.getElementById('modal-root').innerHTML = ''; }
 
@@ -588,7 +616,7 @@ function renderWeekly() {
   let body = '';
   if (step === 0) {
     const active = tasks.filter(t => t.tier==='now' || t.tier==='week');
-    body = `${active.map(t=>`<div class="review-item"><input type="checkbox" id="wr${t.id}" onchange="if(this.checked){done(${t.id});renderWeekly()}"><label for="wr${t.id}">${t.title}<span style="color:var(--text-faint);font-size:11px">${t.due?' ÃÂ· '+fmtFull(t.due):''}</span></label></div>`).join('')}
+    body = `${active.map(t=>`<div class="review-item"><input type="checkbox" id="wr${t.id}" onchange="if(this.checked){done(${t.id});renderWeekly()}"><label for="wr${t.id}">${t.title}<span style="color:var(--text-faint);font-size:11px">${t.due?' ÃÂÃÂ· '+fmtFull(t.due):''}</span></label></div>`).join('')}
     <label>New tasks to add this week?</label><textarea id="w-new" rows="3" placeholder="One per line..."></textarea>`;
   } else if (step === 1) {
     body = allMain.map(t=>`<div class="review-item" style="flex-direction:column;align-items:flex-start;gap:4px">
@@ -604,10 +632,10 @@ function renderWeekly() {
     <label>Other writing tasks this week?</label>
     <textarea id="w-other" rows="2" placeholder="Robin Hood Paradox, memos, etc."></textarea>`;
   } else if (step === 3) {
-    body = `${eAll.length ? eAll.map(t=>`<div class="review-item"><input type="checkbox" id="we${t.id}" onchange="if(this.checked){done(${t.id});renderWeekly()}"><label for="we${t.id}">${t.title} <span style="color:var(--text-faint);font-size:11px">${t.due?' ÃÂ· '+fmtFull(t.due):''} ÃÂ· ${t.tier}</span></label><button class="ta" onclick="mv(${t.id},'now');renderWeekly()">&#8593; now</button></div>`).join('') : '<div class="empty">No email tasks.</div>'}
+    body = `${eAll.length ? eAll.map(t=>`<div class="review-item"><input type="checkbox" id="we${t.id}" onchange="if(this.checked){done(${t.id});renderWeekly()}"><label for="we${t.id}">${t.title} <span style="color:var(--text-faint);font-size:11px">${t.due?' ÃÂÃÂ· '+fmtFull(t.due):''} ÃÂÃÂ· ${t.tier}</span></label><button class="ta" onclick="mv(${t.id},'now');renderWeekly()">&#8593; now</button></div>`).join('') : '<div class="empty">No email tasks.</div>'}
     <label>New email tasks this week?</label><textarea id="w-email" rows="2" placeholder="One per line..."></textarea>`;
   } else if (step === 4) {
-    body = `<div class="week-snapshot">Now: <strong>${tasks.filter(t=>t.tier==='now'&&!t.email).length}</strong> &nbsp;ÃÂ·&nbsp; This week: <strong>${tasks.filter(t=>t.tier==='week'&&!t.email).length}</strong> &nbsp;ÃÂ·&nbsp; Later: <strong>${tasks.filter(t=>t.tier==='later'&&!t.email).length}</strong> &nbsp;ÃÂ·&nbsp; Email: <strong>${tasks.filter(t=>t.email).length}</strong></div>
+    body = `<div class="week-snapshot">Now: <strong>${tasks.filter(t=>t.tier==='now'&&!t.email).length}</strong> &nbsp;ÃÂÃÂ·&nbsp; This week: <strong>${tasks.filter(t=>t.tier==='week'&&!t.email).length}</strong> &nbsp;ÃÂÃÂ·&nbsp; Later: <strong>${tasks.filter(t=>t.tier==='later'&&!t.email).length}</strong> &nbsp;ÃÂÃÂ·&nbsp; Email: <strong>${tasks.filter(t=>t.email).length}</strong></div>
     <div style="font-size:13px;color:var(--text-muted);margin-bottom:1rem">Writing focus: ${writingGoal}</div>
     <label>Notes or reminders for the week?</label><textarea id="w-recap" rows="3" placeholder="Anything to carry into Monday..."></textarea>`;
   }
@@ -617,12 +645,12 @@ function renderWeekly() {
       <div class="modal">
         <div class="step-dots">${steps.map((_,i)=>`<div class="step-dot${i===step?' active':i<step?' done':''}"></div>`).join('')}</div>
         <h2>${steps[step]}</h2>
-        <div class="modal-sub">${['Mark anything resolved from last week.','Set each task\'s tier for the coming week.','Protect writing mornings Ã¢ÂÂ set the week\'s focus.','Review email tasks. Escalate anything urgent.','You\'re set. Print a copy for your reMarkable.'][step]}</div>
+        <div class="modal-sub">${['Mark anything resolved from last week.','Set each task\'s tier for the coming week.','Protect writing mornings ÃÂ¢ÃÂÃÂ set the week\'s focus.','Review email tasks. Escalate anything urgent.','You\'re set. Print a copy for your reMarkable.'][step]}</div>
         ${body}
         <div class="modal-btns">
           <button class="btn" onclick="closeWeekly()">Cancel</button>
           ${step > 0 ? `<button class="btn" onclick="weeklyBack()">&#8592; Back</button>` : ''}
-          <button class="btn btn-accent" onclick="weeklyNext()">${step === steps.length-1 ? 'Done Ã¢ÂÂ print PDF' : 'Next &#8594;'}</button>
+          <button class="btn btn-accent" onclick="weeklyNext()">${step === steps.length-1 ? 'Done ÃÂ¢ÃÂÃÂ print PDF' : 'Next &#8594;'}</button>
         </div>
       </div>
     </div>`;
@@ -662,7 +690,7 @@ function weeklyNext() {
   weeklyState.step++; renderWeekly();
 }
 
-// Ã¢ÂÂÃ¢ÂÂ Init Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Init ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 
 // saveNotes_placeholder() { localStorage.setItem(NK, JSON.stringify(notes)); syncToSheet(); }
 function toggleNotes() { notesOpen = !notesOpen; localStorage.setItem(NOK, notesOpen); render(); }
