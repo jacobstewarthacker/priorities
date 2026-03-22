@@ -460,7 +460,7 @@ function mv(id, tier) { const t = tasks.find(t => t.id === id); if (t) { t.tier 
 function setUrl(id, url) { const t = tasks.find(t => t.id === id); if (t) { t.url = url.trim(); save(); render(); } }
 function toggleEmail() { emailOpen = !emailOpen; localStorage.setItem(EOK, emailOpen); render(); }
 function toggleMed() { medOpen = !medOpen; localStorage.setItem(MOK, medOpen); render(); }
-function toggleMedItem(id) { var m = medItems.find(function(m){ return m.id===id; }); if(m){ m.done=!m.done; m.doneAt=m.done?Date.now():null; saveMed(); render(); } }
+function toggleMedItem(id){var m=medItems.find(function(m){return m.id===id;});if(m){m.done=!m.done;m.doneAt=m.done?Date.now():null;saveMed();render();}}
 function addT(sfx, isEmail) {
   const tier = sfx === 'email' ? 'now' : sfx === 'later' ? 'later' : sfx === 'week' ? 'week' : 'now';
   const title = document.getElementById('nt-'+sfx)?.value.trim();
@@ -707,20 +707,7 @@ function taskCal(id) {
   if (!t) return;
   calPrompt(t.title, '', '', t.due || '');
 }
-function addMed() {
-  var inp = document.getElementById('new-med');
-  if (!inp || !inp.value.trim()) return;
-  medItems.push({ id: 'm'+Date.now(), title: inp.value.trim(), done: false, doneAt: null });
-  inp.value = '';
-  saveMed(); render();
-}
-function purgeMed() {
-  var cutoff = Date.now() - 86400000;
-  var n = medItems.length;
-  medItems = medItems.filter(function(m){ return !m.done || !m.doneAt || m.doneAt > cutoff; });
-  if (medItems.length !== n) saveMed();
-}
-load();
+function addMed(){var inp=document.getElementById("new-med");if(!inp||!inp.value.trim())return;medItems.push({id:"m"+Date.now(),title:inp.value.trim(),done:false,doneAt:null});inp.value="";saveMed();render();}function purgeMed(){var cutoff=Date.now()-86400000;var n=medItems.length;medItems=medItems.filter(function(m){return !m.done||!m.doneAt||m.doneAt>cutoff;});if(medItems.length!==n)saveMed();}load();
 autoPromote();
 render();
 </script>
