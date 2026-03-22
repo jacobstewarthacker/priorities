@@ -307,7 +307,7 @@ let tasks, writingGoal, medItems, emailOpen, medOpen, nextId, weeklyState, notes
 function load() {
   try { tasks = JSON.parse(localStorage.getItem(SK)) || [...DEFTASKS]; } catch(e) { tasks = [...DEFTASKS]; }
   writingGoal = localStorage.getItem(WK) || 'Ch. 3 — parties section (Now or Never)';
-  try { medItems = JSON.parse(localStorage.getItem(MK)) || [...DEFMED]; } catch(e) { medItems = [...DEFMED]; }
+  try { medItems = JSON.parse(localStorage.getItem(MK)) || [...DEFMED]; } catch(e) { medItems = [...DEFMED]; } purgeMed();
   emailOpen = localStorage.getItem(EOK) !== 'false';
   medOpen = localStorage.getItem(MOK) === 'true';
   try { notes = JSON.parse(localStorage.getItem(NK)) || []; } catch(e) { notes = []; }
@@ -449,7 +449,7 @@ function render() {
         <span class="section-label">Medical follow-ups (${medItems.filter(m=>!m.done).length} open)</span>
         <button class="coll-toggle">${medOpen ? '&#9650;' : '&#9660;'}</button>
       </div>
-      ${medOpen ? `<div style="margin-top:6px">${medItems.map(m=>`<div class="med-item"><div class="med-check${m.done?' done':''}" onclick="toggleMedItem('${m.id}')"></div><span class="${m.done?'med-done':''}">${m.title}</span></div>`).join('')}</div>` : ''}
+      ${medOpen ? `<div style="margin-top:6px">${medItems.filter(m=>!m.done).map(m=>`<div class="med-item"><div class="med-check" onclick="toggleMedItem('${m.id}')"></div><span>${m.title}</span></div>`).join('')}<div class="add-row" style="margin-top:7px"><input type="text" id="new-med" placeholder="Add follow-up..." style="flex:1;min-width:140px;font-size:12px;font-family:var(--font-sans);padding:5px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text)" onkeydown="if(event.keyCode===13)addMed()"><button class="btn" onclick="addMed()">Add</button></div></div>` : ''}
     </div>`;
 }
 
@@ -460,7 +460,7 @@ function mv(id, tier) { const t = tasks.find(t => t.id === id); if (t) { t.tier 
 function setUrl(id, url) { const t = tasks.find(t => t.id === id); if (t) { t.url = url.trim(); save(); render(); } }
 function toggleEmail() { emailOpen = !emailOpen; localStorage.setItem(EOK, emailOpen); render(); }
 function toggleMed() { medOpen = !medOpen; localStorage.setItem(MOK, medOpen); render(); }
-function toggleMedItem(id) { const m = medItems.find(m => m.id === id); if (m) { m.done = !m.done; saveMed(); render(); } }
+function toggleMedItem(id) { var m = medItems.find(function(m){ return m.id===id; }); if(m){ m.done=!m.done; m.doneAt=m.done?Date.now():null; saveMed(); render(); } }
 function addT(sfx, isEmail) {
   const tier = sfx === 'email' ? 'now' : sfx === 'later' ? 'later' : sfx === 'week' ? 'week' : 'now';
   const title = document.getElementById('nt-'+sfx)?.value.trim();
@@ -706,6 +706,19 @@ function taskCal(id) {
   var t = tasks.find(function(t){ return t.id === id; });
   if (!t) return;
   calPrompt(t.title, '', '', t.due || '');
+}
+function addMed() {
+  var inp = document.getElementById('new-med');
+  if (!inp || !inp.value.trim()) return;
+  medItems.push({ id: 'm'+Date.now(), title: inp.value.trim(), done: false, doneAt: null });
+  inp.value = '';
+  saveMed(); render();
+}
+function purgeMed() {
+  var cutoff = Date.now() - 86400000;
+  var n = medItems.length;
+  medItems = medItems.filter(function(m){ return !m.done || !m.doneAt || m.doneAt > cutoff; });
+  if (medItems.length !== n) saveMed();
 }
 load();
 autoPromote();
