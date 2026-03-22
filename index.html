@@ -395,7 +395,7 @@ function render() {
         <div class="anchor-dot writing"></div>
         <span class="anchor-label">Writing</span>
         <div class="anchor-goal"><input id="wg" value="${writingGoal.replace(/"/g,'&quot;')}" onblur="saveWG(this.value)" onkeydown="if(event.key==='Enter')this.blur()" placeholder="Today's writing goal..."></div>
-        <span class="anchor-time">9ÃÂ¢ÃÂÃÂ12am</span>
+        <span class="anchor-time">9am–12pm</span>
         <button class="anchor-cal" onclick="writingCal()">+ cal</button>
       </div>
       <div class="anchor-row">
@@ -694,7 +694,14 @@ function calCopy() {
   const dateStr = d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
   const fmt = t => { const [h,m] = t.split(':'); const hr = parseInt(h); return (hr % 12 || 12) + (m !== '00' ? ':' + m : '') + (hr < 12 ? 'am' : 'pm'); };
   const text = 'Please create an Outlook calendar block: "' + title + '" on ' + dateStr + ' from ' + fmt(start) + ' to ' + fmt(end) + '. Show me the details and confirm before creating.';
-  navigator.clipboard.writeText(text).then(() => { closeCalModal(); alert('Copied ÃÂ¢ÃÂÃÂ paste into Claude to create the calendar block.'); }).catch(() => alert(text));
+  navigator.clipboard.writeText(text).then(() => { closeCalModal(); alert('Copied — paste into Claude to create the calendar block.'); }).catch(() => alert(text));
+}
+function writingCal(){
+  var g=(document.getElementById("wg")||{}).value||writingGoal;
+  calPrompt("Now or Never — "+g,"09:00","12:00");
+}
+function meditationCal(){
+  calPrompt("Meditation","07:00","07:15");
 }
 load();
 autoPromote();
