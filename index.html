@@ -655,14 +655,7 @@ function closeCalModal() { var m = document.getElementById('cal-modal'); if (m) 
 function calPrompt(title, defStart, defEnd, defDate) {
   var todayISO = new Date().toISOString().substring(0,10);
   var pop = document.createElement('div');
-  pop.id = 'cal-modal';
-  var durMins = 60; // default 1 hour
-  if (defStart && defEnd) {
-    var s = defStart.split(':'), e = defEnd.split(':');
-    durMins = (parseInt(e[0])*60+parseInt(e[1])) - (parseInt(s[0])*60+parseInt(s[1]));
-    if (durMins <= 0) durMins = 60;
-  }
-  pop.dataset.duration = durMins;
+  pop.id = 'cal-modal'; var durMins=60; if(defStart&&defEnd){   var ss=defStart.split(':'),ee=defEnd.split(':');   durMins=(parseInt(ee[0])*60+parseInt(ee[1]))-(parseInt(ss[0])*60+parseInt(ss[1]));   if(durMins<=0)durMins=60; } pop.dataset.duration=durMins;
   pop.style.cssText = 'position:fixed;inset:0;background:rgba(20,18,14,.45);display:flex;align-items:center;justify-content:center;z-index:300;padding:1rem';
   var ds = defStart || ''; var de = defEnd || ''; var dd = defDate || todayISO;
   pop.innerHTML =
@@ -674,7 +667,7 @@ function calPrompt(title, defStart, defEnd, defDate) {
     '<input id="cal-date" type="date" value="' + dd + '" style="width:100%;font-size:13px;padding:5px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);margin-bottom:.75rem;font-family:var(--font-sans)">' +
     '<div style="display:flex;gap:8px;margin-bottom:1.25rem">' +
     '<div style="flex:1"><label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px">Start</label>' +
-    '<input id="cal-start" type="time" value="' + ds + '" onchange="(function(){var m=document.getElementById('cal-modal');var dur=parseInt(m?m.dataset.duration:60)||60;var v=document.getElementById('cal-start').value;if(!v)return;var p=v.split(':');var tot=parseInt(p[0])*60+parseInt(p[1])+dur;var h=Math.floor(tot/60)%24;var mn=tot%60;document.getElementById('cal-end').value=(h<10?'0'+h:h)+':'+(mn<10?'0'+mn:mn);})()" style="width:100%;font-size:13px;padding:5px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:var(--font-sans)"></div>' +
+    '<input id="cal-start" type="time" value="' + ds + '" onchange="updateEndTime()" style="width:100%;font-size:13px;padding:5px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:var(--font-sans)"></div>' +
     '<div style="flex:1"><label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px">End</label>' +
     '<input id="cal-end" type="time" value="' + de + '" style="width:100%;font-size:13px;padding:5px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:var(--font-sans)"></div>' +
     '</div>' +
@@ -714,7 +707,7 @@ function taskCal(id) {
   if (!t) return;
   calPrompt(t.title, '', '', t.due || '');
 }
-function addMed(){var inp=document.getElementById("new-med");if(!inp||!inp.value.trim())return;medItems.push({id:"m"+Date.now(),title:inp.value.trim(),done:false,doneAt:null});inp.value="";saveMed();render();}function purgeMed(){var cutoff=Date.now()-86400000;var n=medItems.length;medItems=medItems.filter(function(m){return !m.done||!m.doneAt||m.doneAt>cutoff;});if(medItems.length!==n)saveMed();}load();
+function addMed(){var inp=document.getElementById("new-med");if(!inp||!inp.value.trim())return;medItems.push({id:"m"+Date.now(),title:inp.value.trim(),done:false,doneAt:null});inp.value="";saveMed();render();}function purgeMed(){var cutoff=Date.now()-86400000;var n=medItems.length;medItems=medItems.filter(function(m){return !m.done||!m.doneAt||m.doneAt>cutoff;});if(medItems.length!==n)saveMed();}function updateEndTime(){var m=document.getElementById("cal-modal");var dur=parseInt(m&&m.dataset.duration||60)||60;var s=document.getElementById("cal-start");if(!s||!s.value)return;var p=s.value.split(":");var tot=parseInt(p[0])*60+parseInt(p[1])+dur;var h=Math.floor(tot/60)%24;var mn=tot%60;var e=document.getElementById("cal-end");if(e)e.value=(h<10?"0"+h:h)+":"+(mn<10?"0"+mn:mn);}load();
 autoPromote();
 render();
 </script>
