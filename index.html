@@ -264,7 +264,7 @@ async function loadFromSheet() {
 }
 
 // ── Storage keys ──────────────────────────────────────────────────────────
-const SK='jt_v2', WK='jw_v2', MK='jm_v2', EOK='jeo_v2', MOK='jmo_v2', NK='jn_v2', NOK='jno_v2';
+const SK='jt_v2', WK='jw_v2', MK='jm_v2', EOK='jeo_v2', MOK='jmo_v2', NK='jn_v2', NOK='jno_v2', PK='jp_v2';
 
 // ── Defaults ──────────────────────────────────────────────────────────────
 const DEFTASKS = [
@@ -299,7 +299,7 @@ const DEFMED = [
   {id:'m4',title:'Aneurysm follow-up',done:false},
   {id:'m5',title:'Allergic rx review',done:false},
 ];
-const PROJS = ['writing','APEX','ASPE','APE','SSN','research','service','admin','Yale','Ludwig','personal'];
+let PROJS = ['writing','APEX','ASPE','APE','SSN','research','service','admin','Yale','Ludwig','personal'];
 
 // ── State ─────────────────────────────────────────────────────────────────
 let tasks, writingGoal, medItems, emailOpen, medOpen, nextId, weeklyState, notes = [], notesOpen = false;
@@ -308,7 +308,7 @@ function load() {
   try { tasks = JSON.parse(localStorage.getItem(SK)) || [...DEFTASKS]; } catch(e) { tasks = [...DEFTASKS]; }
   writingGoal = localStorage.getItem(WK) || 'Ch. 3 — parties section (Now or Never)';
   try { medItems = JSON.parse(localStorage.getItem(MK)) || [...DEFMED]; } catch(e) { medItems = [...DEFMED]; } purgeMed();
-  emailOpen = localStorage.getItem(EOK) !== 'false';
+  try { var cp=JSON.parse(localStorage.getItem(PK)); if(cp&&cp.length) cp.forEach(function(p){ if(PROJS.indexOf(p)<0) PROJS.push(p); }); } catch(e){} emailOpen = localStorage.getItem(EOK) !== 'false';
   medOpen = localStorage.getItem(MOK) === 'true';
   try { notes = JSON.parse(localStorage.getItem(NK)) || []; } catch(e) { notes = []; }
   notesOpen = localStorage.getItem(NOK) === 'true';
@@ -372,7 +372,7 @@ function tcHTML(t, dimmed) {
 function addRowHTML(sfx, isEmail) {
   return `<div class="add-row">
     <input type="text" id="nt-${sfx}" placeholder="Add task..." onkeydown="if(event.key==='Enter')addT('${sfx}',${isEmail})">
-    <select id="np-${sfx}">${PROJS.map(p=>`<option>${p}</option>`).join('')}</select>
+    <select id="np-${sfx}" onchange="addProject(this)">${PROJS.map(p=>`<option>${p}</option>`).join('')}<option value="__new__">+ Add new...</option></select>
     <select id="ne-${sfx}"><option value="sm">small</option><option value="md" selected>medium</option><option value="lg">large</option></select>
     <input type="date" id="nd-${sfx}">
     <input type="text" id="nu-${sfx}" placeholder="Link (optional)" style="min-width:120px;flex:0.6">
@@ -500,7 +500,7 @@ function editTask(id) {
     <div style="display:flex;gap:8px;margin-bottom:.75rem;flex-wrap:wrap">
       <div style="flex:1;min-width:100px">
         <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px">Project</label>
-        <select id="ep-proj" style="width:100%;font-size:12px;padding:5px 6px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:var(--font-sans)">${PROJS.map(p=>'<option'+(p===t.proj?' selected':'')+'>'+p+'</option>').join('')}</select>
+        <select id="ep-proj" onchange="addProject(this);if(this.value==='__new__')this.value=PROJS[PROJS.length-1]" style="width:100%;font-size:12px;padding:5px 6px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:var(--font-sans)">${PROJS.map(p=>'<option'+(p===t.proj?' selected':'')+'>'+p+'</option>').join('')}<option value='__new__'>+ Add new...</option></select>
       </div>
       <div style="flex:1;min-width:100px">
         <label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px">Effort</label>
@@ -707,7 +707,7 @@ function taskCal(id) {
   if (!t) return;
   calPrompt(t.title, '', '', t.due || '');
 }
-function addMed(){var inp=document.getElementById("new-med");if(!inp||!inp.value.trim())return;medItems.push({id:"m"+Date.now(),title:inp.value.trim(),done:false,doneAt:null});inp.value="";saveMed();render();}function purgeMed(){var cutoff=Date.now()-86400000;var n=medItems.length;medItems=medItems.filter(function(m){return !m.done||!m.doneAt||m.doneAt>cutoff;});if(medItems.length!==n)saveMed();}function updateEndTime(){var m=document.getElementById("cal-modal");var dur=parseInt(m&&m.dataset.duration||60)||60;var s=document.getElementById("cal-start");if(!s||!s.value)return;var p=s.value.split(":");var tot=parseInt(p[0])*60+parseInt(p[1])+dur;var h=Math.floor(tot/60)%24;var mn=tot%60;var e=document.getElementById("cal-end");if(e)e.value=(h<10?"0"+h:h)+":"+(mn<10?"0"+mn:mn);}load();
+function addMed(){var inp=document.getElementById("new-med");if(!inp||!inp.value.trim())return;medItems.push({id:"m"+Date.now(),title:inp.value.trim(),done:false,doneAt:null});inp.value="";saveMed();render();}function purgeMed(){var cutoff=Date.now()-86400000;var n=medItems.length;medItems=medItems.filter(function(m){return !m.done||!m.doneAt||m.doneAt>cutoff;});if(medItems.length!==n)saveMed();}function updateEndTime(){var m=document.getElementById("cal-modal");var dur=parseInt(m&&m.dataset.duration||60)||60;var s=document.getElementById("cal-start");if(!s||!s.value)return;var p=s.value.split(":");var tot=parseInt(p[0])*60+parseInt(p[1])+dur;var h=Math.floor(tot/60)%24;var mn=tot%60;var e=document.getElementById("cal-end");if(e)e.value=(h<10?"0"+h:h)+":"+(mn<10?"0"+mn:mn);}function addProject(selectEl){if(!selectEl||selectEl.value!=="__new__")return;var name=prompt("New category name:");if(!name||!name.trim()){selectEl.value=PROJS[0];return;}name=name.trim();if(PROJS.indexOf(name)<0){PROJS.push(name);try{var cp=JSON.parse(localStorage.getItem(PK)||"[]");cp.push(name);localStorage.setItem(PK,JSON.stringify(cp));}catch(e){}render();}selectEl.value=name;}load();
 autoPromote();
 render();
 </script>
