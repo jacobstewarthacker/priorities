@@ -253,6 +253,9 @@ async function loadFromSheet() {
       id:parseInt(r[0])||0,title:r[1]||'',tier:r[2]||'week',
       proj:r[3]||'admin',effort:r[4]||'md',due:r[5]||'',email:r[6]==='true',url:r[7]||''
     }));
+    // Deduplicate by id (sheet may have duplicates from race conditions)
+    var seen = new Set();
+    tasks = tasks.filter(function(t){ if(seen.has(t.id)) return false; seen.add(t.id); return true; });
     nextId = Math.max(...tasks.map(t=>t.id))+1;
     localStorage.setItem(SK,JSON.stringify(tasks));
   }
@@ -315,7 +318,12 @@ function load() {
   nextId = tasks.length ? Math.max(...tasks.map(t => t.id)) + 1 : 50;
   initGoogleAuth();
 }
-function save() { localStorage.setItem(SK, JSON.stringify(tasks)); syncToSheet(); }
+var _syncTimer = null;
+function save() {
+  localStorage.setItem(SK, JSON.stringify(tasks));
+  if (_syncTimer) clearTimeout(_syncTimer);
+  _syncTimer = setTimeout(function(){ syncToSheet(); _syncTimer = null; }, 1500);
+}
 function saveMed() { localStorage.setItem(MK, JSON.stringify(medItems)); }
 function saveWG(v) { writingGoal = v; localStorage.setItem(WK, v); syncToSheet(); }
 
