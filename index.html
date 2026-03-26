@@ -268,6 +268,11 @@ async function loadFromSheet() {
 
 // ── Storage keys ──────────────────────────────────────────────────────────
 const SK='jt_v2', WK='jw_v2', MK='jm_v2', EOK='jeo_v2', MOK='jmo_v2', NK='jn_v2', NOK='jno_v2', PK='jp_v2', LMK='jlm_v2';
+// ?reset=1 clears local storage and forces fresh sheet load
+if(window.location.search.includes("reset=1")){
+  [SK,WK,MK,EOK,MOK,NK,NOK,PK,LMK].forEach(function(k){localStorage.removeItem(k);});
+  window.location.replace(window.location.pathname);
+}
 
 // ── Defaults ──────────────────────────────────────────────────────────────
 const DEFTASKS = [
