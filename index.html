@@ -248,7 +248,7 @@ async function loadFromSheet() {
     sheetsReq('GET','/'+sheetId+'/values/Tasks!A1:H500'),
     sheetsReq('GET','/'+sheetId+'/values/Meta!A1:B10')
   ]);
-  if (tr?.values?.length>1) {
+  var sheetLM=0; if(mr?.values)mr.values.forEach(function(r){if(r[0]==="lastModified")sheetLM=parseInt(r[1])||0;}); var localLM=parseInt(localStorage.getItem(LMK)||"0"); if(sheetLM>0&&localLM>0&&localLM>=sheetLM){setSyncStatus("synced");render();return;} if (tr?.values?.length>1) {
     tasks = tr.values.slice(1).filter(r=>r[0]).map(r=>({
       id:parseInt(r[0])||0,title:r[1]||'',tier:r[2]||'week',
       proj:r[3]||'admin',effort:r[4]||'md',due:r[5]||'',email:r[6]==='true',url:r[7]||''
@@ -267,7 +267,7 @@ async function loadFromSheet() {
 }
 
 // ── Storage keys ──────────────────────────────────────────────────────────
-const SK='jt_v2', WK='jw_v2', MK='jm_v2', EOK='jeo_v2', MOK='jmo_v2', NK='jn_v2', NOK='jno_v2', PK='jp_v2';
+const SK='jt_v2', WK='jw_v2', MK='jm_v2', EOK='jeo_v2', MOK='jmo_v2', NK='jn_v2', NOK='jno_v2', PK='jp_v2', LMK='jlm_v2';
 
 // ── Defaults ──────────────────────────────────────────────────────────────
 const DEFTASKS = [
@@ -321,6 +321,7 @@ function load() {
 var _syncTimer = null;
 function save() {
   localStorage.setItem(SK, JSON.stringify(tasks));
+  localStorage.setItem(LMK, Date.now().toString());
   if (_syncTimer) clearTimeout(_syncTimer);
   _syncTimer = setTimeout(function(){ syncToSheet(); _syncTimer = null; }, 1500);
 }
