@@ -322,6 +322,7 @@ function load() {
   try { tasks = JSON.parse(localStorage.getItem(SK)) || [...DEFTASKS]; } catch(e) { tasks = [...DEFTASKS]; }
   writingGoal = localStorage.getItem(WK) || 'Ch. 3 ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ parties section (Now or Never)';
    tasks = tasks.filter(function(t){ return !t.title.match(/Sara Steger|Minna van Gerven|Amilcar Moreira/); });
+    tasks = tasks.filter(function(t){ return !/(Sara Steger|Minna van Gerven|Amilcar Moreira)/.test(t.title); });
   try { medItems = JSON.parse(localStorage.getItem(MK)) || [...DEFMED]; } catch(e) { medItems = [...DEFMED]; } purgeMed(); try{invites=JSON.parse(localStorage.getItem(IK))||[{id:"i1",name:"Sara Steger",context:"Winner-Take-All Politics reader event"},{id:"i2",name:"Minna van Gerven",context:"Encyclopedia of Public Policy"},{id:"i3",name:"Amilcar Moreira",context:"ESPAnet keynote"}];}catch(e){invites=[];} invitesOpen=localStorage.getItem(IOK)!=="false";
   try { var cp=JSON.parse(localStorage.getItem(PK)); if(cp&&cp.length) cp.forEach(function(p){ if(PROJS.indexOf(p)<0) PROJS.push(p); }); } catch(e){} emailOpen = localStorage.getItem(EOK) !== 'false';
   medOpen = localStorage.getItem(MOK) === 'true';
@@ -445,7 +446,7 @@ function render() {
 
   document.getElementById('main').innerHTML = `
     <div class="section">
-      <div class="section-header"><span class="section-label">Now â top priority</span><span class="section-count">${nowM.length}</span></div>
+      <div class="section-header"><span class="section-label">Now — top priority</span><span class="section-count">${nowM.length}</span></div>
       <div class="tasks">${nowM.length ? nowM.map(t=>tcHTML(t,false)).join('') : '<div class="empty">Nothing urgent ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ surface a task from below.</div>'}</div>
       ${addRowHTML('now',false)}
     </div>
