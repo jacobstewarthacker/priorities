@@ -746,21 +746,24 @@ function addInvite(){
 function removeInvite(id){invites=invites.filter(function(i){return i.id!==id;});saveInvites();render();}
 function buildInvitesHTML(){
   if(!invites||!invites.length) return '';
-  var rows=invites.map(function(i){
+  var q = String.fromCharCode(39);
+  var rows = invites.map(function(i){
     return '<div class="tc"><div class="tc-body"><div class="tc-title"><span class="tc-title-text">'
-      +i.name+(i.context?' <span class="tc-proj">'+i.context+'</span>':'')+'</span></div>'
-      +'<div class="tc-actions"><button class="ta" onclick="removeInvite(''+i.id+'')" title="Remove">&#10005;</button></div>'
-      +'</div></div>';
+      + i.name
+      + (i.context ? ' <span class="tc-proj">' + i.context + '</span>' : '')
+      + '</span></div><div class="tc-actions">'
+      + '<button class="ta" onclick="removeInvite(' + q + i.id + q + ')" title="Remove">&#10005;</button>'
+      + '</div></div></div>';
   }).join('');
-  var addRow='<div class="add-row" style="padding:6px 12px">'
-    +'<input type="text" id="new-invite" placeholder="Add person..." '
-    +'style="flex:1;min-width:140px;font-size:12px;font-family:var(--font-sans);padding:5px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text)" '
-    +'onkeydown="if(event.keyCode===13)addInvite()">'
-    +'<button class="btn" onclick="addInvite()">Add</button></div>';
+  var addRow = '<div class="add-row" style="padding:6px 12px">'
+    + '<input type="text" id="new-invite" placeholder="Add person..."'
+    + ' style="flex:1;min-width:140px;font-size:12px;font-family:var(--font-sans);padding:5px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text)"'
+    + ' onkeydown="if(event.keyCode===13)addInvite()">'
+    + '<button class="btn" onclick="addInvite()">Add</button></div>';
   return '<div class="section"><div class="section-header">'
-    +'<span class="section-label">Invites</span>'
-    +'<span class="section-count">'+invites.length+'</span></div>'
-    +'<div class="tasks">'+rows+addRow+'</div></div>';
+    + '<span class="section-label">Invites</span>'
+    + '<span class="section-count">' + invites.length + '</span></div>'
+    + '<div class="tasks">' + rows + addRow + '</div></div>';
 }
 load();
 autoPromote();
