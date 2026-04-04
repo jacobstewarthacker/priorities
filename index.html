@@ -417,20 +417,20 @@ function render() {
         <div class="anchor-dot writing"></div>
         <span class="anchor-label">Writing</span>
         <div class="anchor-goal"><input id="wg" value="${writingGoal.replace(/"/g,'&quot;')}" onblur="saveWG(this.value)" onkeydown="if(event.key==='Enter')this.blur()" placeholder="Today's writing goal..."></div>
-        <span class="anchor-time">9amâ12pm</span>
+        <span class="anchor-time">9am–12pm</span>
         <button class="anchor-cal" onclick="writingCal()">+ cal</button>
       </div>
       <div class="anchor-row">
         <div class="anchor-dot" style="background:var(--amber)"></div>
         <span class="anchor-label">Reading</span>
         <div class="anchor-goal" style="font-size:13px;font-family:var(--font-serif);color:var(--text-muted)">Work reading &amp; @ThingsToRead</div>
-        <span class="anchor-time">1â3pm</span>
+        <span class="anchor-time">1–3pm</span>
         <button class="anchor-cal" onclick="readingCal()">+ cal</button>
       </div>
       <div class="anchor-row">
         <div class="anchor-dot med"></div>
         <span class="anchor-label">Meditation</span>
-        <div class="anchor-goal" style="font-size:13px;font-family:var(--font-serif);color:var(--text-muted)">15 min â daily</div>
+        <div class="anchor-goal" style="font-size:13px;font-family:var(--font-serif);color:var(--text-muted)">15 min — daily</div>
         <span class="anchor-time">7am</span>
         <button class="anchor-cal" onclick="meditationCal()">+ cal</button>
       </div>
@@ -443,7 +443,7 @@ function render() {
 
   document.getElementById('main').innerHTML = `
     <div class="section">
-      <div class="section-header"><span class="section-label">Now â top priority</span><span class="section-count">${nowM.length}</span></div>
+      <div class="section-header"><span class="section-label">Now — top priority</span><span class="section-count">${nowM.length}</span></div>
       <div class="tasks">${nowM.length ? nowM.map(t=>tcHTML(t,false)).join('') : '<div class="empty">Nothing urgent Ã¢ÂÂ surface a task from below.</div>'}</div>
       ${addRowHTML('now',false)}
     </div>
@@ -454,7 +454,7 @@ function render() {
       ${buildInvitesHTML()}
     </div>
     <div class="section">
-      <div class="section-header"><span class="section-label">Later â on the radar</span><span class="section-count">${later.length}</span></div>
+      <div class="section-header"><span class="section-label">Later — on the radar</span><span class="section-count">${later.length}</span></div>
       <div class="tasks">${later.length ? later.map(t=>tcHTML(t,true)).join('') : '<div class="empty">Nothing parked.</div>'}</div>
       ${addRowHTML('later',false)}
     </div>`;
@@ -574,7 +574,7 @@ function calPrompt(type) {
   const goal = document.getElementById('wg')?.value || writingGoal;
   const dateStr = today.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
   const text = type === 'writing'
-    ? `Please draft an Outlook calendar block for writing 9amâ12pm today (${dateStr}), title: "Now or Never Ã¢ÂÂ ${goal}". Show me the details and ask me to confirm before creating it.`
+    ? `Please draft an Outlook calendar block for writing 9am–12pm today (${dateStr}), title: "Now or Never Ã¢ÂÂ ${goal}". Show me the details and ask me to confirm before creating it.`
     : `Please draft an Outlook calendar block for meditation at 7am today (${dateStr}), 15 minutes, title: "Meditation". Show me the details and ask me to confirm.`;
   navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard Ã¢ÂÂ paste into Claude to create the calendar block.')).catch(() => alert(text));
 }
