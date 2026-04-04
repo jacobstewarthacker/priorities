@@ -765,6 +765,17 @@ function buildInvitesHTML(){
     + '<span class="section-count">' + invites.length + '</span></div>'
     + '<div class="tasks">' + rows + addRow + '</div></div>';
 }
+
+function invitePrompt(id) {
+  var i = invites.find(function(x){ return x.id===id; });
+  if (!i) return;
+  var text = "Please help me respond to " + i.name + "'s email"
+    + (i.context ? " about " + i.context : "") + "."
+    + " Find the email in my inbox and draft a reply.";
+  navigator.clipboard.writeText(text).then(function(){
+    alert("Prompt copied! Paste it into your Email chat.");
+  }).catch(function(){ alert(text); });
+}
 load();
 autoPromote();
 render();
