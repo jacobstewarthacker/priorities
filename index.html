@@ -207,8 +207,8 @@ function signIn() { if (window._tokenClient) window._tokenClient.requestAccessTo
 function setSyncStatus(s) {
   syncStatus = s;
   const el = document.getElementById('sync-status'); if (!el) return;
-  const L = {local:'local only',auth:'connecting...',synced:'synced',saving:'saving...',error:'sync error',offline:'offline'};
-  const C = {local:'var(--text-faint)',auth:'var(--amber)',synced:'var(--green)',saving:'var(--amber)',error:'var(--red)',offline:'var(--text-faint)'};
+  const L = {local:'local only',expired:'⚠️ token expired — tap resync',auth:'connecting...',synced:'synced',saving:'saving...',error:'sync error',offline:'offline'};
+  const C = {local:'var(--text-faint)',expired:'var(--red)',auth:'var(--amber)',synced:'var(--green)',saving:'var(--amber)',error:'var(--red)',offline:'var(--text-faint)'};
   el.textContent = L[s]||s; el.style.color = C[s]||'var(--text-faint)';
 }
 async function sheetsReq(method, path, body) {
@@ -244,7 +244,7 @@ async function syncToSheet() {
     const r=await fetch('https://sheets.googleapis.com/v4/spreadsheets/'+sheetId+'/values/Tasks!A1:H'+(rows.length)+'?valueInputOption=RAW',{method:'PUT',headers:{'Authorization':'Bearer '+gToken,'Content-Type':'application/json'},body:JSON.stringify({values:rows})});
     const meta=[['writingGoal',writingGoal],['medItems',JSON.stringify(medItems)],['notes',JSON.stringify(typeof notes!=='undefined'?notes:[])],['lastModified',localStorage.getItem(LMK)||'0']];
     await fetch('https://sheets.googleapis.com/v4/spreadsheets/'+sheetId+'/values/Meta!A1:B'+meta.length+'?valueInputOption=RAW',{method:'PUT',headers:{'Authorization':'Bearer '+gToken,'Content-Type':'application/json'},body:JSON.stringify({values:meta})});
-    setSyncStatus(r.ok?'synced':'error');
+    if(r.status===401){gToken=null;localStorage.removeItem(LS_TOKEN);setSyncStatus('expired');}else{if(r.ok)localStorage.setItem('jls_v2',Date.now().toString());setSyncStatus(r.ok?'synced':'error');}
   } catch(e) { setSyncStatus('error'); }
 }
 async function loadFromSheet() {
