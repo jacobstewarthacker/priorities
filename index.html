@@ -379,6 +379,7 @@ function tcHTML(t, dimmed) {
       </div>
     </div>
     <div class="tc-actions">
+      ${t.email?`<select class="ta" style="font-size:11px;padding:1px 2px" onchange="promoteEmail(${t.id},this.value);this.value=''"><option value="" disabled selected>→ move to</option><option value="now">↑ Now</option><option value="week">This Week</option><option value="later">Later</option></select>`:''}
       ${t.tier!=='now'?`<button class="ta" onclick="mv(${t.id},'now')">&#8593; now</button>`:''}
       ${t.tier==='now'?`<button class="ta" onclick="mv(${t.id},'week')">&#8595; week</button>`:''}
       ${t.tier==='week'?`<button class="ta" onclick="mv(${t.id},'later')">later</button>`:''}
@@ -387,6 +388,12 @@ function tcHTML(t, dimmed) {
       <button class="ta" onclick="del(${t.id})">&#10005;</button>
     </div>
   </div>`;
+}
+
+function promoteEmail(id, tier) {
+  const t = tasks.find(t=>t.id===id); if(!t) return;
+  t.email = false; t.tier = tier;
+  save(); render();
 }
 
 function addRowHTML(sfx, isEmail) {
